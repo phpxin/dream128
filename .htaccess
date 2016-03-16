@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f 
+
+# admin rewrite rule
+
+#ajax 请求action页面重写
+#RewriteRule ^/?homeAction/([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/?$ /index.php?module=$1&action=$2&%{QUERY_STRING} [L,NC]
+#RewriteRule ^/?adminAction/([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/?$ /admin.php?module=$1&action=$2&%{QUERY_STRING} [L,NC]
+#RewriteRule ^/?apiAction/([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/?$ /api.php?module=$1&action=$2&%{QUERY_STRING} [L,NC]

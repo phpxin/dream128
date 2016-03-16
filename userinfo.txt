@@ -1,0 +1,30 @@
+http://dream128.local.com/kphp/admin.php?m=index&a=user
+由于在云平台使用，暂时不能使用url rewrite
+m	代表模型名
+a	代表控制器
+
+
+index.php	前台入口
+admin.php	后台入口
+
+
+如果需要在本地开发，请自行配置
+1.在index.php同级目录下建立df文件（debug flag），程序会自动开启本地开发模式
+2.配置数据库，最好将本地数据库用户名密码改成和我一样的，方便开发
+if(DEBUG_MODE){
+	define('DB_HOST', '127.0.0.1') ;
+	define('DB_PORT', '3306') ;
+	define('DB_USER', 'root') ;
+	define('DB_PWD', 'lixinxin') ;
+	define('DB_NAME', 'wshop') ;
+}else{
+	define('DB_HOST',SAE_MYSQL_HOST_M) ;
+	define('DB_PORT', SAE_MYSQL_PORT) ;
+	define('DB_USER',SAE_MYSQL_USER) ;
+	define('DB_PWD',SAE_MYSQL_PASS) ;
+	define('DB_NAME',SAE_MYSQL_DB) ;
+}
+
+
+
+
