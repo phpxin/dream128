@@ -64,75 +64,19 @@ function subString($str, $start, $length){
  * @info 此函数为php自动调用
  */
 function classLoader($className){
-	var_dump($className);
 	$loaderArr = explode('\\', $className);
 	$pathDef = $loaderArr ;
 	
 	$str = implode(DS, $pathDef);
-	include $str.'.class.php';
-	
-	
-	/*
-	
-	if(strtolower(substr($className,-5))=='model'){
-		
-		if(!file_exists('Lib/Model/'.$className.'.class.php')){
-			throw new NotFoundException("model类未找到");
-		}else{
-			include 'Lib/Model/'.$className.'.class.php';
-		}
-		
-	}else if(strtolower(substr($className,-9))=='exception'){
-		
-		include 'Lib/Exception/'.$className.'.class.php';
-		
-	}else{
-		
-		//如果项目文件中没有，在核心包搜索
-		if(file_exists('Lib/Core/'.$className.'.class.php')){
-			include 'Lib/Core/'.$className.'.class.php';
-		}else{
-			//交给其他自动加载类函数 如 smarty
-			//throw new NotFoundException("类 $className 未找到" );
-		}
-		
+	$filename = $str.'.class.php' ;
+	if (file_exists($filename))
+	{
+		include $filename;
 	}
-	
-	*/
-	
+	//不存在则使用其他Loader
+	//Smarty会使用自己的Loader
 }
-function classLoader_home($className){	//加载网页前台子项目自用的类
-	//echo $className;
-	//echo str_replace($className, '\\', '/');
-	//include str_replace($className, '\\', '/').'.class.php';
-	
-	$aa = explode('\\', $className);
-	
-	var_dump($aa);
-	
-	$file = $className.'.class.php';
-	
-	if (file_exists($file))
-		include $className.'.class.php';
-	else 
-		classLoader($className);
-	/*
-	echo $className ;
-	if(strtolower(substr($className,-6))=='action'){
-		include str_replace($className, '\\', '/').'/'.$className.'.class.php';
-	}else{
-		classLoader($className);
-	}
-	*/
-}
-function classLoader_admin($className){	//加载网页前台子项目自用的类
 
-	if(strtolower(substr($className,-6))=='action'){
-		include 'Lib/Action/Admin/'.$className.'.class.php';
-	}else{
-		classLoader($className);
-	}
-}
 /**
  * 获取标准路径（前台）
  * Enter description here ...
@@ -152,7 +96,6 @@ function U_home($_params=array()){
 	
 	return __ROOT__.'/index.php?m='.$module.'&a='.$action.'&'.$data;
 }
-
 
 function U_admin($_params=array()){
 	
@@ -190,38 +133,13 @@ function M($table){
 	if(empty($dbMaster[$table])){
 		try{
 			$dbMaster[$table] = new $modelName();
-		}catch(NotFoundException $e){
+		}catch(\Lib\Exception\SourceNotFound $e){
 			//如果类不存在则直接调用基类
 			$dbMaster[$table] = new BaseModel($table);
 		}
 		return $dbMaster[$table];
 	}
 	return $dbMaster[$table];
-}
-
-/**
- * 获取数据库连接实例（用于分表操作）
- * Enter description here ...
- * @param string $table
- * @param unknown_type $tIndex
- */
-function M2($table, $tIndex='00')
-{
-	static $dbMaster2;
-	$realTableName = $table.'_'.$tIndex	;
-	$modelName=ucfirst(strtolower($table)).'Model';
-	
-	if(empty($dbMaster2[$realTableName])){
-		try{
-			$dbMaster2[$realTableName] = new $modelName($tIndex);
-		}catch(NotFoundException $e){
-			//如果类不存在则直接调用基类
-			$dbMaster2[$realTableName] = new BaseModel($realTableName);
-		}
-		return $dbMaster2[$realTableName];
-	}
-	return $dbMaster2[$realTableName];
-	
 }
 
 /**

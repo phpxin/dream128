@@ -40,7 +40,7 @@ define('DB_PREFIX','') ;
 
 
 //环境变量 (最后不要加分隔符)
-define('__ROOT__','/kphp');
+define('__ROOT__','');
 define('__THEME__',__ROOT__.'/theme');
 
 //错误日志
