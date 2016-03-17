@@ -67,8 +67,8 @@ abstract class Base{
 		$T->left_delimiter = '<{';
 		$T->right_delimiter ='}>';
 	
-		$T->debugging = true;
-		$T->caching = false;
+		$T->debugging = DEBUG_MODE ? true : false ;
+		$T->caching = DEBUG_MODE ? false : true ;
 		$T->cache_lifetime = 120;
 	
 		//注册模板需要的函数

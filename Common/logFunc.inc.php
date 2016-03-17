@@ -1,6 +1,4 @@
 <?php
-namespace Common ;
-
 /**
  * 日志处理函数库
  * @author lixin

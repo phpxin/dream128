@@ -13,6 +13,8 @@ class Base extends \Lib\Controller\Base{
 		$this->homepath = 'home' ;
 	}
 	
+	
+	
 }
 
 

@@ -1,5 +1,6 @@
 <?php
 namespace Lib\Model ;
+use \Lib\Core\Db ;
 
 /**
  * 数据库基类，提供公用项目数据库层代码
@@ -7,7 +8,9 @@ namespace Lib\Model ;
  * @author lixin
  *
  */
-class Base
+abstract class Base extends Db\Dbmysql
 {
+	
 
+	
 }

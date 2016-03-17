@@ -127,19 +127,23 @@ function safeStr($s){
  * 获取数据库连接实例
  * @param string $table 表名
  */
-function M($table){
+function M($table, $app=''){
 	static $dbMaster ;	//定义一个在函数执行后不会释放的静态变量， 存放数据库类实例化的容器
-	$modelName=ucfirst(strtolower($table)).'Model';
-	if(empty($dbMaster[$table])){
-		try{
-			$dbMaster[$table] = new $modelName();
-		}catch(\Lib\Exception\SourceNotFound $e){
-			//如果类不存在则直接调用基类
-			$dbMaster[$table] = new BaseModel($table);
-		}
-		return $dbMaster[$table];
+	
+	if (!empty($app)) {
+		$App = ucfirst(strtolower($app));
+		$modelName="\\Lib\\Model\\".$App."\\".ucfirst(strtolower($table));
+	}else{
+		$modelName="\\Lib\\Model\\".ucfirst(strtolower($table));
+		$App = '*' ; // * is public
 	}
-	return $dbMaster[$table];
+	
+	
+	if(empty($dbMaster[$App][$table])){
+		$dbMaster[$App][$table] = new $modelName();
+	}
+	
+	return $dbMaster[$App][$table];
 }
 
 /**

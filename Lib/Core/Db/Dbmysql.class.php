@@ -7,7 +7,7 @@ namespace Lib\Core\Db ;
  * @author lixin
  * @date 2014-05-28
  */
-class Dbmysql extends PDO {
+abstract class Dbmysql{
 
 	protected $dsn;
 	protected $host;
@@ -33,6 +33,11 @@ class Dbmysql extends PDO {
 	protected $_order='';
 	protected $_limit='';
 	protected $_join='';
+	
+	private $link = null ;
+	
+	abstract protected function getName();
+	abstract protected function getAlias();
 
 	/**
 	 * 构造函数
@@ -40,7 +45,7 @@ class Dbmysql extends PDO {
 	 * @param unknown_type $tableName
 	 * @throws SQLException
 	 */
-	public function __construct($tableName=''){
+	public function __construct(){
 		$this->host=DB_HOST;
 		$this->port = DB_PORT;
 		$this->user=DB_USER;
@@ -50,17 +55,17 @@ class Dbmysql extends PDO {
 		$this->charset = DB_CHARSET;
 		$this->cacheFolder=rtrim(DB_CACHE_FOLDER,'/').'/';
 
-		$this->setTableName($tableName);
+		$this->setTableName();
 
 		//尝试连接数据库
 		//mysql:host=localhost;port=3307;dbname=testdb
 		$this->dsn = 'mysql:host='.$this->host.';port='.$this->port.';dbname='.$this->db;
 
 		try{
-			parent::__construct($this->dsn, $this->user, $this->pwd);
-		}catch(PDOException $e){
+			$this->link = new \PDO($this->dsn, $this->user, $this->pwd);
+		}catch(\PDOException $e){
 
-			throw new SQLException('pdo 数据库连接失败 :'.$e->getMessage());
+			throw new \Lib\Exception\Statement('pdo 数据库连接失败 :'.$e->getMessage());
 
 		}
 
@@ -75,18 +80,20 @@ class Dbmysql extends PDO {
 	 * Enter description here ...
 	 * @param string $tableName 去掉前缀的数据表名称，首次调用自动生成
 	 */
-	private function setTableName($tableName=null)
+	protected function setTableName()
 	{
+		$this->tableAlias = $this->getAlias();
+	
 		if(empty($this->tableName_c)){
-			$this->tableName_c=$this->prefix.strtolower((empty($tableName)?substr(get_class($this), 0, -5):$tableName));
+			$this->tableName_c=$this->getName();
 		}
-
+	
 		if(!empty($this->_join)){
 			$this->tableName=$this->tableName_c.' as '.$this->tableAlias;
 		}else{
 			$this->tableName=$this->tableName_c;
 		}
-
+	
 	}
 
 	/**
@@ -113,7 +120,7 @@ class Dbmysql extends PDO {
 		$string="<?php \n return ".var_export($field,true)."\n ?>";
 
 		if(!file_put_contents($this->cacheFolder.$this->tableName.'.php',$string)){
-			throw new SQLException('设置数据库字段失败,写入文件失败，请检查文件权限');
+			throw new \Lib\Exception\Statement('设置数据库字段失败,写入文件失败，请检查文件权限');
 			return ;
 		}
 
@@ -155,11 +162,22 @@ class Dbmysql extends PDO {
 	public function query($sql){
 		$this->flushMembers();	//清空条件缓冲
 		$this->sql=$sql;
-//		echo $sql.'<br />	';
-		$statement=parent::query($sql);
-		$result=$statement->fetchAll(PDO::FETCH_ASSOC);
-		if(!empty($result))	return $result;
-		else return false;
+		
+		$statement=$this->link->query($sql);
+		
+		if ($statement === false){
+			throw new \Lib\Exception\Statement("SQL ERR " . $sql);
+		}
+		
+		$rowcount = $statement->rowCount();
+		
+		if ($rowcount <= 0){
+			return array();
+		}
+		
+		$result=$statement->fetchAll(\PDO::FETCH_ASSOC);
+		
+		return $result;
 	}
 
 	/**
@@ -171,7 +189,7 @@ class Dbmysql extends PDO {
 		$this->flushMembers();	//清空条件缓冲
 		$this->sql=$sql;
 
-		$statement=parent::query($sql);
+		$statement=$this->link->query($sql);
 		if(!empty($statement))
 			return $statement->rowCount();
 		else
@@ -487,7 +505,7 @@ class Dbmysql extends PDO {
 	 * Enter description here ...
 	 */
 	public function getLastInsertId(){
-		return parent::lastInsertId();
+		return $this->link->lastInsertId();
 	}
 	/**
 	 * 最后一次sql

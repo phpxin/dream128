@@ -2,3 +2,5 @@
 .buildpath
 .project
 upload/*
+Common/config.php
+db_cache/*

@@ -1,6 +1,6 @@
 <?php
 namespace Lib\Exception ;
 
-class Statement extends Exception{
+class Statement extends \Exception{
 	
 }
