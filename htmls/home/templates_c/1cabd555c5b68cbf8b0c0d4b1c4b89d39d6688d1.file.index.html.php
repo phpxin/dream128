@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.16, created on 2016-03-19 10:46:44
+<?php /* Smarty version Smarty-3.1.16, created on 2016-03-20 21:16:44
          compiled from ".\htmls\home\templates\Index\index.html" */ ?>
 <?php /*%%SmartyHeaderCode:2114156ea19dde5f779-38516439%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1cabd555c5b68cbf8b0c0d4b1c4b89d39d6688d1' => 
     array (
       0 => '.\\htmls\\home\\templates\\Index\\index.html',
-      1 => 1458355599,
+      1 => 1458479801,
       2 => 'file',
     ),
   ),
@@ -39,13 +39,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <body>
 <header >
 </header>
-	<div class="container">
-		
-		
-      
-
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
+  <div class="container container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -97,11 +92,40 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<div class="container" style="margin-top : 100px">
+
+	<div class="row">
+		<div class="col-md-9">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Panel title</h3>
+			  </div>
+			  <div class="panel-body">
+			    Panel content
+			  </div>
+			</div>	
+		</div>
+		<div class="col-md-3">
+			<ul class="list-group">
+			  <li class="list-group-item">Cras justo odio</li>
+			  <li class="list-group-item">Dapibus ac facilisis in</li>
+			  <li class="list-group-item">Morbi leo risus</li>
+			  <li class="list-group-item">Porta ac consectetur ac</li>
+			  <li class="list-group-item">Vestibulum at eros</li>
+			  <li class="list-group-item">Vestibulum at eros</li>
+			  <li class="list-group-item">Vestibulum at eros</li>
+			  <li class="list-group-item">Vestibulum at eros</li>
+			  <li class="list-group-item">Vestibulum at eros</li>
+			  <li class="list-group-item">Vestibulum at eros</li>
+			  <li class="list-group-item">Vestibulum at eros</li>
+			</ul>
+		</div>
+	
+	</div>
 
 </div>
+
 <div>
-
-
 
 </div>
 <script src="<?php echo $_smarty_tpl->tpl_vars['__PUBLIC__']->value;?>
