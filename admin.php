@@ -6,22 +6,19 @@
  */
 include 'Common/common.php';
 
-//增加include文件夹
-//set_include_path(get_include_path().';./Lib');
-
 //创建get参数
 $GLOBALS['safeGetParam'] = createGetParams(); //将安全get参数装载到全局数组
 $GLOBALS['safePostParam'] = createPostParams(); //将安全get参数装载到全局数组
 $GLOBALS['safeCookieParam'] = createCookieParams(); //将安全cookie参数装载到全局数组
 
 //注册自动加载类函数，__autoload与 smarty3 有冲突
-spl_autoload_register('classLoader_admin');
+spl_autoload_register('classLoader');
 
 //加载控制器
 $module = safeStr($GLOBALS['safeGetParam']['m']);	//   module   模块
 $action = safeStr($GLOBALS['safeGetParam']['a']);	//	 action	  控制器
 
-$module = empty($module)?'IndexAction':ucfirst(strtolower($module)).'Action';
+$module = empty($module)? '\\Lib\\Controller\\Admin\\Index': '\\Lib\\Controller\\Admin\\'.ucfirst(strtolower($module));
 $action = empty($action)?'index':strtolower($action);
 
 $__m = new $module();

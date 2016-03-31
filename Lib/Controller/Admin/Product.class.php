@@ -1,5 +1,5 @@
 <?php
-namespace Controller ;
+namespace Lib\Controller\Admin;
 
 class Product extends Base
 {

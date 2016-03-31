@@ -13,7 +13,9 @@ class Base extends \Lib\Controller\Base{
 		$this->homepath = 'home' ;
 	}
 	
-	
+	protected function registerSmartyFuncs(){
+		$this->template->registerPlugin(\Smarty::PLUGIN_FUNCTION, 'U_home', 'U_home');
+	}
 	
 }
 

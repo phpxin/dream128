@@ -4,4 +4,5 @@
 upload/*
 Common/config.php
 db_cache/*
-*/templates_c/*
+htmls/home/templates_c/*
+htmls/admin/templates_c/*

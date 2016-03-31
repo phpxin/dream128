@@ -49,6 +49,8 @@ abstract class Base{
 		$this->template->assign($key,$val);
 	}
 	
+	abstract function registerSmartyFuncs() ;
+	
 	/**
 	 * 初始化模板引擎
 	 * Enter description here ...
@@ -73,7 +75,6 @@ abstract class Base{
 	
 		//注册模板需要的函数
 		$T->registerPlugin(\Smarty::PLUGIN_FUNCTION, 'dump', 'dump');
-		$T->registerPlugin(\Smarty::PLUGIN_FUNCTION, 'U_home', 'U_home');
 	
 		//初始化环境变量
 		$T->assign('__ROOT__',__ROOT__);
@@ -81,6 +82,8 @@ abstract class Base{
 		$T->assign('__THEME__',__THEME__.'/'.$this->homepath);
 	
 		$this->template=$T;
+		
+		$this->registerSmartyFuncs();
 	
 	}
 }

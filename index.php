@@ -21,7 +21,6 @@ $action = safeStr($GLOBALS['safeGetParam']['a']);	//	 action	  控制器
 $module = empty($module)? '\\Lib\\Controller\\Home\\Index': '\\Lib\\Controller\\Home\\'.ucfirst(strtolower($module));
 $action = empty($action)?'index':strtolower($action);
 
-
 $__m = new $module();
 
 $__m->$action();

@@ -1,5 +1,5 @@
 <?php
-namespace Controller ;
+namespace Lib\Controller\Admin;
 
 class Index extends Base
 {
