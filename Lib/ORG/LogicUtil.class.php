@@ -1,4 +1,5 @@
 <?php
+namespace Lib\ORG ;
 /**
  * 业务逻辑工具类
  * Enter description here ...
@@ -7,6 +8,44 @@
  */
 class LogicUtil
 {
+	
+	public static function getSafeQueryString( $value ){
+		if (!get_magic_quotes_gpc()){
+			return addslashes($value) ;
+		}
+		
+		return $value ;
+	}
+	
+	public static function removeXssString( $value ){
+		$ret = str_replace('script', '', $value);
+		$ret = str_replace('iframe', '', $ret);
+		$ret = str_replace('link', '', $ret);
+		
+		return $ret ;
+	}
+	
+	public static function localJump( $params, $action, $module, $app){
+		
+		if ($app == 'home') {
+			
+		}
+		
+		$func = "U_{$app}" ;
+		
+		$url = $func(array(
+				'm' => $module ,
+				'a' => $action ,
+				'p' => trim($params, ' &?') 
+		));
+		
+		
+		
+		header('location:'.$url) ;
+		exit();
+	}
+	
+	
 	/**
 	 * 验证手机号码是否合法
 	 * Enter description here ...

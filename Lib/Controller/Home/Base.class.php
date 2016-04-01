@@ -7,10 +7,13 @@ namespace Lib\Controller\Home;
  * @author   lixin <lixin65535@126.com>
  * @date 2014-05-28
  */
-class Base extends \Lib\Controller\Base{
+abstract class Base extends \Lib\Controller\Base{
 	
-	public function init(){
+	
+	protected function init(){
 		$this->homepath = 'home' ;
+		
+		parent::init();
 	}
 	
 	protected function registerSmartyFuncs(){

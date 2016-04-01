@@ -36,28 +36,6 @@ function importORGClass($str){
 }
 
 /**
- * 字符串统计
- * Enter description here ...
- * @param unknown_type $str
- */
-function strLength($str)
-{
-	return mb_strlen($str, 'utf-8');
-}
-
-/**
- * 字符串截取
- * Enter description here ...
- * @param unknown_type $str
- * @param unknown_type $start
- * @param unknown_type $limit
- */
-function subString($str, $start, $length){
-	return mb_substr ( $str , $start , $length , 'utf-8' );
-	
-}
-
-/**
  * 自动加载类（主要）
  * @param string $s 类名
  * @return string 
@@ -94,7 +72,7 @@ function U_home($_params=array()){
 	
 	$data = !empty($_params['p']) ? $_params['p'] : '' ;
 	
-	return __ROOT__.'/index.php?m='.$module.'&a='.$action.'&'.$data;
+	return rtrim(__ROOT__.'/index.php?m='.$module.'&a='.$action.'&'.$data, '&');
 }
 
 function U_admin($_params=array()){
@@ -107,20 +85,56 @@ function U_admin($_params=array()){
 	
 	$data = !empty($_params['p']) ? $_params['p'] : '' ;
 	
-	return __ROOT__.'/admin.php?m='.$module.'&a='.$action.'&'.$data;
+	return rtrim(__ROOT__.'/admin.php?m='.$module.'&a='.$action.'&'.$data, '&');
 }
 
 /**
- * 字符串处理
- * @param string $s 字符串
- * @return string 
+ * 获取Input值
+ * @param string $key				需要获取的值
+ * @param string $datatype			string/int/double/float
+ * @param mixed $default			
+ * @param string $vartype
  */
-function safeStr($s){
-	if(!get_magic_quotes_gpc()){
-		return addslashes(htmlspecialchars(trim($s))) ;
+function getRequestInt($key, $default=0, $type='get'){
+	$source = $_GET ;
+	if ($type == 'post'){
+		$source = $_POST ;
+	}
+	
+	if (!isset($source[$key]) || empty($source[$key])){
+		return $default ;
+	}
+	
+	return intval($source[$key]);
+}
+function getRequestDouble($key, $default=0.0, $type='get'){
+	$source = $_GET ;
+	if ($type == 'post'){
+		$source = $_POST ;
 	}
 
-	return htmlspecialchars(trim($s)) ;
+	if (!isset($source[$key]) || empty($source[$key])){
+		return $default ;
+	}
+
+	return doubleval($source[$key]);
+}
+function getRequestString($key, $default='', $type='get'){
+	$source = $_GET ;
+	if ($type == 'post'){
+		$source = $_POST ;
+	}
+
+	if (!isset($source[$key]) || empty($source[$key])){
+		return $default ;
+	}
+
+	$value = strval($source[$key]);
+	
+	$value = \Lib\ORG\LogicUtil::removeXssString($value);
+	$value = \Lib\ORG\LogicUtil::getSafeQueryString($value);
+	
+	return $value;
 }
 
 /**
@@ -147,38 +161,8 @@ function M($table, $app=''){
 }
 
 /**
- * 处理cookie 数据
- * Enter description here ...
- */
-function createCookieParams(){
-	foreach($_COOKIE as $key=>$value){
-		if($key=='U'){
-			//处理特殊cookie参数
-			$value = str_replace(" ", "+", $value);
-			$value = str_replace('"', '',  $value);
-		}
-		$safeParam[$key] = safeStr($value) ;
-	}
-	
-	return $safeParam;
-}
-
-/**
- * 处理http post 数据
- * Enter description here ...
- */
-function createPostParams(){
-	foreach($_POST as $key=>$value){
-		$safeParam[$key] = safeStr($value) ;
-	}
-	
-	return $safeParam;	
-}
-
-/**
  * 处理http get 数据
  * @param string $table 表名
- */
 function createGetParams(){
 	if(URL_MODE===1){
 		if(!empty($_SERVER['PATH_INFO'])){
@@ -203,6 +187,7 @@ function createGetParams(){
 	
 	return $safeParam;
 }
+ */
 
 
 ?>

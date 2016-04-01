@@ -6,14 +6,16 @@ abstract class Base{
 
 	protected $template ;
 	protected $homepath = 'app' ;  //  模板位置
-	protected $noLoginAction = array();
+	protected $noLoginActions = array() ;
 	
 	public function __construct(){
 		$this->init();
 		$this->createTempEngine(); //初始化模板引擎
 	}
 	
-	abstract function init() ;
+	protected function init(){
+		
+	}
 	
 	/**
 	 * 显示模板
@@ -22,8 +24,9 @@ abstract class Base{
 	 */
 	public function show($str)
 	{
-		$className=get_class($this);
-		$className = basename($className);
+		$className = get_class($this);
+		$className = str_replace('\\', '/', $className);
+		$className = substr($className, strrpos($className, '/') + 1);
 	
 		$mArray=explode('/', trim(str_replace('\\', '/', $str), '/'));
 	
@@ -49,7 +52,7 @@ abstract class Base{
 		$this->template->assign($key,$val);
 	}
 	
-	abstract function registerSmartyFuncs() ;
+	abstract protected function registerSmartyFuncs() ;
 	
 	/**
 	 * 初始化模板引擎

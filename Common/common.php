@@ -11,6 +11,12 @@ include 'config.php';
 include 'func.inc.php';
 include 'logFunc.inc.php';
 
+//全局公共配置
+class Common{
+	public  static $_action = '' ;
+	public  static $_module = '' ;
+}
+
 //系统日志
 if(LOG_ERROR){
 	set_error_handler('logErrorToFile',E_ALL-E_NOTICE); //设置警告级处理函数
