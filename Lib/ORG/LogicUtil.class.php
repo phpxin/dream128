@@ -27,9 +27,9 @@ class LogicUtil
 	
 	public static function localJump( $params, $action, $module, $app){
 		
-		if ($app == 'home') {
+		//if ($app == 'home') {
 			
-		}
+		//}
 		
 		$func = "U_{$app}" ;
 		

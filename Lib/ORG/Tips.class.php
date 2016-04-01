@@ -6,6 +6,8 @@ class Tips{
 	// 成功
 	public static $_CODE_SUCC = 200 ;
 	
+	// 输入错误
+	public static $_CODE_INPUT = 402;
 	// 未登录
 	public static $_CODE_FORBIDDEN = 403 ;
 	// 资源找不到

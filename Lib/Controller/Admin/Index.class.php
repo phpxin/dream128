@@ -1,5 +1,6 @@
 <?php
 namespace Lib\Controller\Admin;
+use \Lib\ORG\Tips as Tips;
 
 class Index extends Base
 {
@@ -25,9 +26,17 @@ class Index extends Base
 	public function doLogin()
 	{
 		$_U = 'root' ;
-		$_P = 'd9b3956011063b98d93ef5ed747a454b' ;
-		
+		$_P = 'd41d8cd98f00b204e9800998ecf8427e' ;
+				
 		$pass = getRequestString('password') ;
+
+		if ($_P == md5($pass)) {
+			# code...
+			$_SESSION['islogin'] = true ;
+			Tips::ajax_success('') ;
+		}
+
+		Tips::ajax_error(Tips::$_CODE_INPUT, '密码错误');
 	}
 	
 	public function login(){

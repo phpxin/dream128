@@ -1,6 +1,7 @@
 .settings
 .buildpath
 .project
+.DS_Store
 upload/*
 log/*
 Common/config.php
