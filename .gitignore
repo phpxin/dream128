@@ -2,6 +2,7 @@
 .buildpath
 .project
 upload/*
+log/*
 Common/config.php
 db_cache/*
 htmls/home/templates_c/*
