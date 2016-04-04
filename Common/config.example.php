@@ -12,6 +12,7 @@ session_start();
 
 //其他配置
 define('DS', DIRECTORY_SEPARATOR);//系统分隔符
+define('DEBUG_MODE', true); // debug 模式
 
 //缓存配置（如果不使用缓存不需要配置）
 define('CACHE_HOST','');
