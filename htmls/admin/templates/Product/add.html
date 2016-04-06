@@ -56,7 +56,7 @@
                             <form role="form" name="content-form">
                                 <div class="form-group">
                                     <label>Title</label>
-                                    <input class="form-control">
+                                    <input class="form-control" name="atitle">
                                     <p class="help-block">Input article title here.</p>
                                 </div>
                                 <div class="form-group">
@@ -101,6 +101,19 @@
     var h_editor = UE.getEditor('editor');
 
     $('#submit').click(function(){
+
+        var params = {} ;
+        params.title = $('[name=atitle]').val();
+        params.content = UE.getEditor('editor').getContent() ;
+
+        $.post('<{U_admin m=product a=doAdd}>', params, function(jdata){
+
+        })
+
+
+        //console.log(params.content)
+
+        /*
         var form_obj = document.forms[0] ;
         var len = form_obj.elements.length ;
 
@@ -111,10 +124,12 @@
             if(info.type == 'text'){
                 console.log(info.value) ;
             }
-            
-        }
 
+        }
         console.log('len is ' + len)
+        */
+
+
     })
 
     $('#reset').click(function(){

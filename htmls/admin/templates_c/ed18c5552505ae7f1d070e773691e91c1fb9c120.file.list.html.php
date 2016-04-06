@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.16, created on 2016-01-04 00:41:52
+<?php /* Smarty version Smarty-3.1.16, created on 2016-04-06 17:11:14
          compiled from ".\htmls\admin\templates\Product\list.html" */ ?>
 <?php /*%%SmartyHeaderCode:2581556894798462ec9-93749264%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ed18c5552505ae7f1d070e773691e91c1fb9c120' => 
     array (
       0 => '.\\htmls\\admin\\templates\\Product\\list.html',
-      1 => 1451839311,
+      1 => 1459933871,
       2 => 'file',
     ),
   ),
@@ -64,7 +64,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">商品列表</h1>
+                    <h1 class="page-header">文章列表</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

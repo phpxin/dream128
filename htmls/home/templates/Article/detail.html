@@ -2,6 +2,8 @@
 <html lang="zh-CN">
 <head>
 <{include file="../Public/header.html"}>
+
+
 </head>
 <body>
 <header >
@@ -13,12 +15,10 @@
 		<div class="col-md-9">
 			<div class="panel panel-default">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">Panel title</h3>
+			    <h3 class="panel-title"><{$detail.title}></h3>
 			  </div>
-			  <div class="panel-body">
-                  <{foreach from=$list item=article}>
-                  <p><a href="<{U_home m=article a=detail p="id=<{$article.id}>"}>" title="<{$article.title}>"><{$article.title}></a></p>
-                  <{/foreach}>
+			  <div class="panel-body" id="preview">
+                  <iframe id="edui271_iframe" class="%%-iframe" height="100%" width="100%" frameborder="0" src="/theme/public/view.html"></iframe>
 			  </div>
 			</div>
 		</div>
@@ -46,5 +46,12 @@
 
 </div>
 <{include file="../Public/footer.html"}>
+<script>
+    //var a = frames[0].document.getElementById('preview').innerHTML ;
+	console.log(frames[0].document)
+	//console.log(frames[0].document.getElementsByTagName('div').length);
+	//var a = $(window.frames[0].document).find('#preview').html() ;
+	//console.log(a)
+</script>
 </body>
 </html>
