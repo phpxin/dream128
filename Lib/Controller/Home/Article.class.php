@@ -7,13 +7,10 @@ class Article extends Base
 	{
 		$id = getRequestInt('id', 0, 'get');
 
-		//echo $id;
-
-
 		$db = M('article');
 
 		$detail = $db->where('id='.$id)->find();
-
+		
 		$this->assign('detail' , $detail);
 
 		$this->show('detail');
