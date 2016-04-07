@@ -72,7 +72,8 @@ abstract class Base{
 		$T->left_delimiter = '<{';
 		$T->right_delimiter ='}>';
 	
-		$T->debugging = DEBUG_MODE ? true : false ;
+		//$T->debugging = DEBUG_MODE ? true : false ;
+		$T->debugging = false ;
 		$T->caching = DEBUG_MODE ? false : true ;
 		$T->cache_lifetime = 120;
 	
