@@ -46,5 +46,5 @@ define('LOG_EXCEPTION_PATH','./log');
 
 //smarty
 define('SMARTY_DIR','Lib/Smarty/libs'.DS);
-
+define('DEBUG_MODE', true) ;
 ?>
