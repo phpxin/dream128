@@ -107,7 +107,12 @@
         params.content = UE.getEditor('editor').getContent() ;
 
         $.post('<{U_admin m=product a=doAdd}>', params, function(jdata){
-
+			jdata = $.parseJSON(jdata) ;
+			if(jdata.code == 200){
+				window.location.reload() ;
+			}else{
+				alert(jdata.data.msg) ;
+			}
         })
 
 
