@@ -7,13 +7,23 @@ namespace Lib\Controller\Home;
  * @author   lixin <lixin65535@126.com>
  * @date 2014-05-28
  */
-abstract class Base extends \Lib\Controller\Base{
+class Base extends \Lib\Controller\Base{
 	
 	
 	protected function init(){
 		$this->homepath = 'home' ;
 		
+		
 		parent::init();
+		
+		// select the hot articles
+		$this->regHotList() ;
+	}
+
+	protected function regHotList() {
+		$db = M("article");
+		$list = $db->limit('10')->select();
+		$this->assign('hotlist', $list);
 	}
 	
 	protected function registerSmartyFuncs(){

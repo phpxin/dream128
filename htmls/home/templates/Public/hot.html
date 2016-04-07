@@ -1,0 +1,6 @@
+
+<ul class="list-group">
+	<{foreach from=$hotlist item=article}>
+	<li class="list-group-item"><a href="<{U_home m=article a=detail p="id=<{$article.id}>"}>" title="<{$article.title}>"><{$article.title}></a></li>
+	<{/foreach}>
+</ul>

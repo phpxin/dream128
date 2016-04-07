@@ -11,7 +11,10 @@ class Article extends Base
 
 		$detail = $db->where('id='.$id)->find();
 		
+		$content = $detail['content'] ; //preg_replace('/\s+/', ' ', $detail['content']);
+		
 		$this->assign('detail' , $detail);
+		$this->assign('content'	, $content) ;
 
 		$this->show('detail');
 	}

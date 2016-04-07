@@ -8,3 +8,4 @@ Common/config.php
 db_cache/*
 htmls/home/templates_c/*
 htmls/admin/templates_c/*
+.externalToolBuilders

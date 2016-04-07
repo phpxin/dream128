@@ -13,11 +13,20 @@
     </style>
 </head>
 <body class="view">
-    <div id="preview" style="margin:8px">aaaaa</div>
+    <div id="preview" style="margin:8px"> </div>
 </body>
+<script src="./bootstrap3/bower_components/jquery/dist/jquery.min.js"></script>
 <script>
+	//alert(parent.window.content);
+	parseGo()
     function parseGo(){
+    	//$('#preview').html(parent.window.content)
+    	$('#preview').html($(parent.document).find('#content').html())
         uParse('#preview')
+        var h = $(document).height();
+    	console.log(h)
+    	$(parent.document).find('#edui271_iframe').attr('height', h+20)
     }
+	
 </script>
 </html>

@@ -10,11 +10,11 @@ abstract class Base{
 	
 	public function __construct(){
 		$this->init();
-		$this->createTempEngine(); //初始化模板引擎
 	}
 	
 	protected function init(){
 		
+		$this->createTempEngine(); //初始化模板引擎
 	}
 	
 	/**
