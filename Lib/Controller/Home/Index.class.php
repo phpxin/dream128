@@ -12,6 +12,14 @@ class Index extends Base
 		$this->show("index");
 	}
 
+	public function getUrlQrcode(){
+		
+		$text = getRequestString('text') ;
+		$text = urldecode($text);
+		
+		importORGClass('phpqrcode/qrlib.php');
+		\QRcode::png( $text ); // creates file 
+	}
 	
 }
 ?>

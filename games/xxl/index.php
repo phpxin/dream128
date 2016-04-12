@@ -1,3 +1,10 @@
+<?php 
+	
+	if(preg_match('/(iPhone|Android)/iU', $_SERVER['HTTP_USER_AGENT']))
+	{
+		header('location:/games/xxl/m/') ;
+	}
+?>
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 <head>

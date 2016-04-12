@@ -2,3 +2,8 @@
 .navstyle{
 	width:1000px; margin:0 auto;
 }
+.content-tip{
+	text-align: center;
+	min-height: 300px;
+	margin-top: 30px;
+}
