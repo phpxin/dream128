@@ -20,9 +20,9 @@ class Games extends Base
 		switch($act) {
 			case 'planebattle' :
 				header('location:/games/planebattle');
+				break;
 			default:
 				header('location:/');
-				;
 		}
 		
 	}
