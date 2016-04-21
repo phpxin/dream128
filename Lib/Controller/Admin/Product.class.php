@@ -27,6 +27,11 @@ class Product extends Base
 		$title = getRequestString('title', '', 'post');
 		$type = getRequestInt('type', 0, 'post');
 		$content = getRequestString('content', '', 'post');
+		
+		if (empty($title) || empty($type) || empty($content))
+		{
+			Tips::ajax_error(Tips::$_CODE_INPUT, '请填写完整') ;
+		}
 
 		$db = M("article") ;
 		$db->add(array(
@@ -40,11 +45,25 @@ class Product extends Base
 
 		Tips::ajax_success(array('msg'=>'success')) ;
 	}
+	
+	public function edit()
+	{
+		$this->add();
+	}
 
 	public function add()
 	{
+		$id = getRequestInt('id', 0, 'get') ;
+		
 		$typeList = M('type')->getAll();
 		
+		$info = array();
+		if ($id){
+			$info = M('article')->where('id='.$id)->find();
+		}
+
+		$this->assign('info', $info);
+		$this->assign('id', $id);
 		$this->assign('typeList', $typeList);
 		$this->show("add") ;
 	}

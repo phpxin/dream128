@@ -50,7 +50,10 @@
                                             <td><{$article.type_name}></td>
                                             <td class="center"><{date('Y-m-d H:i:s', $article.addtime)}></td>
                                             <td class="center"><{date('Y-m-d H:i:s', $article.update_time)}></td>
-											<td class="center"><a href="javascript:void(0);" onclick="del(<{$article.id}>)">删除</a></td>
+											<td class="center">
+												<a href="javascript:void(0);" onclick="del(<{$article.id}>)">删除</a>
+												<a href="<{U_admin m="product" a="edit" p="id=<{$article.id}>" }>">编辑</a>
+											</td>
                                         </tr>
                                         <{/foreach}>
                                     </tbody>
