@@ -17,7 +17,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">文章列表</h1>
+                    <h1 class="page-header">类型列表</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -35,22 +35,21 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>标题</th>
-                                            <th>类型</th>
-                                            <th>添加时间</th>
-                                            <th>修改时间</th>
-											<th>操作</th>
+                                            <th>名称</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-										<{foreach from=$glist item=article}>
+										<{foreach from=$list item=type}>
                                         <tr class="even gradeC">
-                                            <td><{$article.id}></td>
-                                            <td><a target="_blank" href="<{U_home m=article a=detail p="id=<{$article.id}>"}>" title="<{$article.title}>"><{$article.title}></a></td>
-                                            <td><{$article.type_name}></td>
-                                            <td class="center"><{date('Y-m-d H:i:s', $article.addtime)}></td>
-                                            <td class="center"><{date('Y-m-d H:i:s', $article.update_time)}></td>
-											<td class="center"><a href="javascript:void(0);" onclick="del(<{$article.id}>)">删除</a></td>
+                                            <td><{$type.id}></td>
+                                            <td><{$type.name}></td>
+                                            <td><{if $type.status eq 1}>启用<{else}>禁用<{/if}></td>
+											<td class="center">
+											<a href="javascript:void(0);" onclick="change(<{$type.id}>,0)">禁用</a>
+											<a href="javascript:void(0);" onclick="change(<{$type.id}>,1)">启用</a>
+											</td>
                                         </tr>
                                         <{/foreach}>
                                     </tbody>
@@ -77,15 +76,19 @@
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 
 <script>
-function del(id){
-	//<{U_admin m="product" a="del" p="gid=<{$goods.id}>"}>
+function change(id, status){
 	
-	if(!window.confirm("删除？")){
+	if(status == 0)
+		tip = '禁用' ;
+	else
+		tip = '启用' ;
+	
+	if(!window.confirm(tip+"？")){
 		return ;
 	}
 	
-	$.post('<{U_admin m="product" a="del" }>', {id:id}, function(ret){
-		
+	$.post('<{U_admin m="type" a="change" }>', {id:id, status:status}, function(ret){
+
 		var jdata = $.parseJSON(ret) ;
 		
 		if(jdata.code == 200){

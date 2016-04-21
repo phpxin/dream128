@@ -52,7 +52,7 @@
 			console.log(json_data) ;
             json_data = $.parseJSON(json_data) ;
             if(json_data.code == 200){
-                alert('succ') ;
+                console.log('succ') ;
                 window.location.href = '<{U_admin m=index a=index}>' ;
             }else{
                 alert(json_data.data.msg);

@@ -1,10 +1,10 @@
 <?php
 namespace Lib\Model ;
 
-class Article extends Base
+class Type extends Base
 {
-	protected $name = 'article' ;
-	protected $alias = 'article' ;
+	protected $name = 'type' ;
+	protected $alias = 'type' ;
 	
 	public static $_STATUS_ONLINE = 1 ;
 	public static $_STATUS_OFFLINE = 0 ;
@@ -15,6 +15,20 @@ class Article extends Base
 	
 	protected function getAlias(){
 		return $this->alias;
+	}
+	
+	public function getAllWithIdKey($limit = 30, $page = 1){
+		$_data = $this->getAll($limit, $page);
+		
+		if ($_data){
+			$list = array () ;
+			foreach ($_data as $val){
+				$list[$val['id']] = $val ;
+			}
+			return  $list ;
+		}
+		
+		return array();
 	}
 
 	public function getAll($limit = 30 , $page = 1) {

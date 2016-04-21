@@ -52,7 +52,20 @@ abstract class Base{
 		$this->template->assign($key,$val);
 	}
 	
+	/**
+	 * 注册私有模板函数
+	 */
 	abstract protected function registerSmartyFuncs() ;
+	
+	/**
+	 * 注册公用模板函数
+	 */
+	private function registerSmartyFuncsSys(){
+		$this->template->registerPlugin(\Smarty::PLUGIN_FUNCTION, 'U_home', 'U_home');
+		$this->template->registerPlugin(\Smarty::PLUGIN_FUNCTION, 'U_admin', 'U_admin');
+		
+		$this->registerSmartyFuncs();
+	}
 	
 	/**
 	 * 初始化模板引擎
@@ -87,7 +100,7 @@ abstract class Base{
 	
 		$this->template=$T;
 		
-		$this->registerSmartyFuncs();
-	
+		
+		$this->registerSmartyFuncsSys();
 	}
 }

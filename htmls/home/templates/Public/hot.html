@@ -1,6 +1,23 @@
 
-<ul class="list-group">
-	<{foreach from=$hotlist item=article}>
-	<li class="list-group-item"><a href="<{U_home m=article a=detail p="id=<{$article.id}>"}>" title="<{$article.title}>"><{$article.title}></a></li>
-	<{/foreach}>
-</ul>
+<div class="panel panel-default">
+
+	<div class="panel-heading">热点</div>
+	
+	<!-- 
+	<ul class="list-group">
+		<{foreach from=$hotlist item=article}>
+		<li class="list-group-item"><a href="<{U_home m=article a=detail p="id=<{$article.id}>"}>" title="<{$article.title}>"><{$article.title}></a></li>
+		<{/foreach}>
+	</ul>
+	 -->
+	<div class="list-group">
+		<{foreach from=$hotlist item=article}>
+		<a href="<{U_home m=article a=detail p="id=<{$article.id}>"}>" class="list-group-item">
+			<h4 class="list-group-item-heading"><{$article.title}></h4>
+			<p class="list-group-item-text">...</p>
+		</a>
+		<{/foreach}>
+	</div>
+
+
+</div>

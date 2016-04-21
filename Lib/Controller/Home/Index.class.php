@@ -5,8 +5,12 @@ class Index extends Base
 {
 	public function index()
 	{
+		$type = getRequestInt('type', 0, 'get');
+		
 		$db = M("article");
-		$list = $db->select();
+		$list = $db->where('type='.$type)->select();
+		
+		
 		$this->assign('list', $list);
 
 		$this->show("index");

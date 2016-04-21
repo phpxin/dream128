@@ -18,16 +18,23 @@ class Base extends \Lib\Controller\Base{
 		
 		// select the hot articles
 		$this->regHotList() ;
+		$this->regTypeList() ;
+	}
+	
+	protected function regTypeList(){
+		$currentType = getRequestInt('type', 0, 'get');
+		$typeList = M('type')->getAll();
+		$this->assign('currentType', $currentType);
+		$this->assign('typeList', $typeList);
 	}
 
 	protected function regHotList() {
-		$db = M("article");
-		$list = $db->limit('10')->select();
+		$list = M("article")->getAll(10);
 		$this->assign('hotlist', $list);
 	}
 	
 	protected function registerSmartyFuncs(){
-		$this->template->registerPlugin(\Smarty::PLUGIN_FUNCTION, 'U_home', 'U_home');
+		
 	}
 	
 }

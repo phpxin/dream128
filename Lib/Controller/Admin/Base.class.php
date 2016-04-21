@@ -27,7 +27,7 @@ abstract class Base extends \Lib\Controller\Base{
 	}
 	
 	protected function registerSmartyFuncs(){
-		$this->template->registerPlugin(\Smarty::PLUGIN_FUNCTION, 'U_admin', 'U_admin');
+		
 	}
 }
 

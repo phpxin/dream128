@@ -16,9 +16,16 @@
 			    <h3 class="panel-title">Panel title</h3>
 			  </div>
 			  <div class="panel-body">
-                  <{foreach from=$list item=article}>
-                  <p><a href="<{U_home m=article a=detail p="id=<{$article.id}>"}>" title="<{$article.title}>"><{$article.title}></a></p>
-                  <{/foreach}>
+                  
+                  <{if !$list }>
+					<div class="alert alert-info">
+                    	暂无文章
+                    </div>
+                  <{else}>
+					<{foreach from=$list item=article}>
+					<p><a href="<{U_home m=article a=detail p="id=<{$article.id}>"}>" title="<{$article.title}>"><{$article.title}></a></p>
+					<{/foreach}>
+                  <{/if}>
 			  </div>
 			</div>
 		</div>
