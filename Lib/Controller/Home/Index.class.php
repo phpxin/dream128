@@ -8,8 +8,11 @@ class Index extends Base
 		$type = getRequestInt('type', 0, 'get');
 		
 		$db = M("article");
-		$list = $db->where('type='.$type)->select();
 		
+		if ($type)
+			$list = $db->where('type='.$type)->select();
+		else 
+			$list = $db->select();
 		
 		$this->assign('list', $list);
 
