@@ -24,6 +24,7 @@ class Product extends Base
 
 	public function doAdd()
 	{
+		$id = getRequestInt('id', 0, 'post');
 		$title = getRequestString('title', '', 'post');
 		$type = getRequestInt('type', 0, 'post');
 		$content = getRequestString('content', '', 'post');
@@ -34,14 +35,26 @@ class Product extends Base
 		}
 
 		$db = M("article") ;
-		$db->add(array(
-			'type'=>$type ,
-			'title' => $title ,
-			'content' => $content ,
-			'addtime' => time() ,
-			'update_time' => time() ,
-			'status' => M_Article::$_STATUS_ONLINE ,
-		));
+		
+		if(empty($id)){
+			$db->add(array(
+				'type'=>$type ,
+				'title' => $title ,
+				'content' => $content ,
+				'addtime' => time() ,
+				'update_time' => time() ,
+				'status' => M_Article::$_STATUS_ONLINE ,
+			));
+			
+		}else{
+			$db->where('id='.$id)->update(array(
+				'type'=>$type ,
+				'title' => $title ,
+				'content' => $content ,
+				'update_time' => time() ,
+			));
+		}
+		
 
 		Tips::ajax_success(array('msg'=>'success')) ;
 	}

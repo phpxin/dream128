@@ -37,6 +37,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <form role="form" name="content-form">
+                            	<input type="hidden" name="id" value="<{$info.id}>" >
                                 <div class="form-group">
                                     <label>Title</label>
                                     <input class="form-control" name="atitle" value="<{$info.title}>">
@@ -78,18 +79,16 @@
 <script type="text/javascript">
     //实例化编辑器
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-    //var h_editor = UE.getEditor('editor').execCommand('insertHtml', $('#_content').html()); //.setContent($('#_content').html());
-    //console.log($('#_content').html());
-    //h_editor.setContent($('#_content').html());
     h_editor = UE.getEditor('editor');
     
-    $(function(){
-    	UE.getEditor('editor').setContent('a', false);
+    h_editor.ready(function(){
+    	this.setContent($('#_content').html(), false);
     })
 
     $('#submit').click(function(){
 
         var params = {} ;
+        params.id = $('[name=id]').val();
         params.title = $('[name=atitle]').val();
         params.type = $('[name=type]').val();
         params.content = UE.getEditor('editor').getContent() ;
@@ -97,7 +96,7 @@
         $.post('<{U_admin m=product a=doAdd}>', params, function(jdata){
 			jdata = $.parseJSON(jdata) ;
 			if(jdata.code == 200){
-				window.location.reload() ;
+				window.location.href='<{U_admin m=product a=glist}>' ;
 			}else{
 				alert(jdata.data.msg) ;
 			}
