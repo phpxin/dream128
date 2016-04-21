@@ -8,7 +8,7 @@ class Games extends Base
 		//act=planebattle
 		$act = getRequestString('act') ;
 		
-		$onlyWap = array('planebattle') ;
+		$onlyWap = array('planebattle', 'catch') ;
 		
 		if(in_array($act, $onlyWap) && !preg_match('/(iPhone|Android)/iU', $_SERVER['HTTP_USER_AGENT'])) {
 			$url = 'http://'.trim($_SERVER['HTTP_HOST'],'/').'/'.ltrim($_SERVER['REQUEST_URI'], '/') ;
@@ -20,6 +20,9 @@ class Games extends Base
 		switch($act) {
 			case 'planebattle' :
 				header('location:/games/planebattle');
+				break;
+			case 'catch' :
+				header('location:/games/catch');
 				break;
 			default:
 				header('location:/');
