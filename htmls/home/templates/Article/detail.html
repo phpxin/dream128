@@ -2,6 +2,12 @@
 <html lang="zh-CN">
 <head>
 <{include file="../Public/header.html"}>
+<script type="text/javascript" charset="utf-8" src="/theme/public/editor/ueditor.parse.js"></script>
+<link id="syntaxhighlighter_css" rel="stylesheet" type="text/css" href="/theme/public/editor/third-party/SyntaxHighlighter/shCoreDefault.css" />
+<script id="syntaxhighlighter_js" type="text/javascript" defer="defer" src="/theme/public/editor/third-party/SyntaxHighlighter/shCore.js"></script>
+<style>
+	#preview *{font-family:Courier New ,sans-serif;font-size:12px;}
+</style>
 </head>
 <body>
 <header >
@@ -18,7 +24,8 @@
 			    <h3 class="panel-title"><{$detail.title}></h3>
 			  </div>
 			  <div class="panel-body" id="preview">
-                  <iframe id="edui271_iframe" class="%%-iframe" height="100%" width="100%" frameborder="0" src="/theme/public/view.html"></iframe>
+                  <!-- <iframe id="edui271_iframe" class="%%-iframe" height="100%" width="100%" frameborder="0" src="/theme/public/view.html"></iframe> -->
+                  <div id="preview" style="margin:8px"><{$content}></div>
 			  </div>
 			</div>
 		</div>
@@ -35,11 +42,15 @@
 </div>
 <{include file="../Public/footer.html"}>
 <script>
-    //var a = frames[0].document.getElementById('preview').innerHTML ;
-	console.log(frames[0].document)
-	//console.log(frames[0].document.getElementsByTagName('div').length);
-	//var a = $(window.frames[0].document).find('#preview').html() ;
-	//console.log(a)
+parseGo()
+function parseGo(){
+	//$('#preview').html(parent.window.content)
+	$('#preview').html($(parent.document).find('#content').html())
+    uParse('#preview')
+    var h = $(document).height();
+	console.log(h)
+	$(parent.document).find('#edui271_iframe').attr('height', h+20)
+}
 </script>
 </body>
 </html>
