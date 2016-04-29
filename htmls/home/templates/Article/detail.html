@@ -14,9 +14,6 @@
 </header>
 <{include file="../Public/nav.html"}>
 <div class="container main">
-	<div id="content" style="display:none">
-		<{$content}>
-	</div>
 	<div class="row">
 		<div class="col-md-9">
 			<div class="panel panel-default">
@@ -25,7 +22,7 @@
 			  </div>
 			  <div class="panel-body" id="preview">
                   <!-- <iframe id="edui271_iframe" class="%%-iframe" height="100%" width="100%" frameborder="0" src="/theme/public/view.html"></iframe> -->
-                  <div id="preview" style="margin:8px"><{$content}></div>
+                  <div id="preview"><{$content}></div>
 			  </div>
 			</div>
 		</div>
@@ -42,15 +39,8 @@
 </div>
 <{include file="../Public/footer.html"}>
 <script>
-parseGo()
-function parseGo(){
-	//$('#preview').html(parent.window.content)
-	$('#preview').html($(parent.document).find('#content').html())
-    uParse('#preview')
-    var h = $(document).height();
-	console.log(h)
-	$(parent.document).find('#edui271_iframe').attr('height', h+20)
-}
+uParse('#preview') ;
+$('.syntaxhighlighter').css('width', '200px');
 </script>
 </body>
 </html>
