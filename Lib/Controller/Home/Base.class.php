@@ -9,6 +9,7 @@ namespace Lib\Controller\Home;
  */
 class Base extends \Lib\Controller\Base{
 	
+	protected $webname = 'dream128' ;
 	
 	protected function init(){
 		$this->homepath = 'home' ;
@@ -19,6 +20,9 @@ class Base extends \Lib\Controller\Base{
 		// select the hot articles
 		$this->regHotList() ;
 		$this->regTypeList() ;
+		
+		$this->assign("page_title", $this->webname) ;
+		$this->assign("page_keywords", "dream128，个人博客，IT技术，小游戏，编程语言，数据库，游戏编程") ;
 	}
 	
 	protected function regTypeList(){

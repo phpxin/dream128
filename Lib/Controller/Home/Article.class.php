@@ -15,6 +15,8 @@ class Article extends Base
 		
 		$this->assign('detail' , $detail);
 		$this->assign('content'	, $content) ;
+		
+		$this->assign('page_title', $detail['title'].'_'.$this->webname) ;
 
 		$this->show('detail');
 	}
