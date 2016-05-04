@@ -27,7 +27,7 @@ class Product extends Base
 		$id = getRequestInt('id', 0, 'post');
 		$title = getRequestString('title', '', 'post');
 		$type = getRequestInt('type', 0, 'post');
-		$content = getRequestString('content', '', 'post');
+		$content = $_POST['content'];
 		
 		if (empty($title) || empty($type) || empty($content))
 		{
