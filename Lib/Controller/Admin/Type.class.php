@@ -18,13 +18,13 @@ class Type extends Base
 	
 	
 	public function doAdd(){
-		$name = getRequestString('name', '', 'post');
+		$name = trim($_POST['name']);
 		
 		if (empty($name))
 			Tips::ajax_error(Tips::$_CODE_INPUT, '缺少参数NAME') ;
 		
 		M('type')->add(array(
-				'name'=>$name
+			'name'=>$name
 		));
 		
 		Tips::ajax_success(array('msg'=>'success')) ;

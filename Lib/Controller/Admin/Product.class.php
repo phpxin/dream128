@@ -25,9 +25,13 @@ class Product extends Base
 	public function doAdd()
 	{
 		$id = getRequestInt('id', 0, 'post');
-		$title = getRequestString('title', '', 'post');
 		$type = getRequestInt('type', 0, 'post');
+
+		$title = $_POST['title'];
 		$content = $_POST['content'];
+		
+		$title = trim($title);
+		$content = trim($content);
 		
 		if (empty($title) || empty($type) || empty($content))
 		{
