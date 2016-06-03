@@ -154,6 +154,39 @@ abstract class Dbmysql{
 	 	$this->_join='';
 	 	$this->_field_join='';
 	}
+	
+	/**
+	 * 执行sql，记录DEBUG信息
+	 * Enter description here ...
+	 * @param unknown_type $sql
+	 */
+	private function _query($sql){
+		
+		$_start = microtime(true) ;
+		$statement=$this->link->query($sql);
+		$_end = microtime(true) ;
+		
+		if('00000' !== $this->link->errorCode()){
+			$errInfo = $this->link->errorInfo();
+			throw new \Lib\Exception\Statement("SQL '{$sql}' ERR  ; ERR {$errInfo[0]} {$errInfo[1]} INFO {$errInfo[2]}");
+		}
+		
+		if('00000' !== $statement->errorCode()){
+			$errInfo = $statement->errorInfo();
+			throw new \Lib\Exception\Statement("SQL '{$sql}' ERR  ; ERR {$errInfo[0]} {$errInfo[1]} INFO {$errInfo[2]}");
+		}
+		
+		$rowcount = $statement->rowCount();
+		
+		\Lib\Core\Db\DbHelper::setSql(array(
+			'sql' => $sql ,
+			'rowcount' => $rowcount ,
+			'time' => $_end - $_start ,
+		)) ;
+		
+		
+		return $statement;
+	}
 
 	/**
 	 * 执行查询 select(non-PHPdoc)
@@ -163,13 +196,28 @@ abstract class Dbmysql{
 		$this->flushMembers();	//清空条件缓冲
 		$this->sql=$sql;
 		
+		/*
 		$statement=$this->link->query($sql);
 		
-		if ($statement === false){
-			throw new \Lib\Exception\Statement("SQL ERR " . $sql);
+		if('00000' !== $this->link->errorCode()){
+			$errInfo = $this->link->errorInfo();
+			throw new \Lib\Exception\Statement("SQL '{$sql}' ERR  ; ERR {$errInfo[0]} {$errInfo[1]} INFO {$errInfo[2]}");
 		}
 		
+		if('00000' !== $statement->errorCode()){
+			$errInfo = $statement->errorInfo();
+			throw new \Lib\Exception\Statement("SQL '{$sql}' ERR  ; ERR {$errInfo[0]} {$errInfo[1]} INFO {$errInfo[2]}");
+		}
+		
+		*/
+		
+		$statement=$this->_query($sql);
+		
 		$rowcount = $statement->rowCount();
+		
+		/*
+		\Lib\Core\Db\DbHelper::setSql("{$sql} {$rowcount} row") ;
+		*/
 		
 		if ($rowcount <= 0){
 			return array();
@@ -181,7 +229,7 @@ abstract class Dbmysql{
 	}
 
 	/**
-	 * 执行更新 insert delete update
+	 * 执行更新 delete update 会返回条数，insert 由于不属于更新操作，不会返回条数，只要不触发异常既为成功
 	 * Enter description here ...
 	 * @param $sql
 	 */
@@ -189,11 +237,30 @@ abstract class Dbmysql{
 		$this->flushMembers();	//清空条件缓冲
 		$this->sql=$sql;
 
+		/*
 		$statement=$this->link->query($sql);
-		if(!empty($statement))
-			return $statement->rowCount();
-		else
-			return false;
+		
+		if('00000' !== $this->link->errorCode()){
+			$errInfo = $this->link->errorInfo();
+			throw new \Lib\Exception\Statement("SQL '{$sql}' ERR  ; ERR {$errInfo[0]} {$errInfo[1]} INFO {$errInfo[2]}");
+		}
+		
+		if('00000' !== $statement->errorCode()){
+			$errInfo = $statement->errorInfo();
+			throw new \Lib\Exception\Statement("SQL '{$sql}' ERR  ; ERR {$errInfo[0]} {$errInfo[1]} INFO {$errInfo[2]}");
+		}
+		
+		*/
+		
+		$statement=$this->_query($sql);
+		$rowcount = $statement->rowCount() ;
+		
+		
+		/*
+		\Lib\Core\Db\DbHelper::setSql("{$sql} {$rowcount} row") ;
+		*/
+		
+		return $rowcount;
 	}
 
 	/**
@@ -214,8 +281,11 @@ abstract class Dbmysql{
 		$this->execQueryFilter(); //参数重组
 		$sql="insert into $this->tableName($field) values($values)";
 
+		$this->execute($sql);
 
-		return $this->execute($sql);
+		$id = $this->getLastInsertId();
+		
+		return $id;
 
 
 	}

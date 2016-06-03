@@ -96,6 +96,7 @@
         $.post('<{U_admin m=product a=doAdd}>', params, function(jdata){
 			jdata = $.parseJSON(jdata) ;
 			if(jdata.code == 200){
+				//console.log(jdata)
 				window.location.href='<{U_admin m=product a=glist}>' ;
 			}else{
 				alert(jdata.data.msg) ;

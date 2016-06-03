@@ -8,13 +8,45 @@ abstract class Base{
 	protected $homepath = 'app' ;  //  模板位置
 	protected $noLoginActions = array() ;
 	
+	protected $__THEME__ = '' ;
+	protected $__PUBLIC__ = '' ;
+	
+	protected $css = array();
+	protected $js = array();
+	
 	public function __construct(){
 		$this->init();
 	}
 	
-	protected function init(){
-		
+	protected function init()
+	{
+		$this->__PUBLIC__ = __THEME__.'/public' ;
+		$this->__THEME__ = __THEME__.'/'.$this->homepath ;
 		$this->createTempEngine(); //初始化模板引擎
+	}
+	
+	protected function addCss($_css){
+		array_push($this->css, $_css) ;
+	}
+	
+	protected function addJs($_js){
+		array_push($this->js, $_js) ;
+	}
+	
+	/**
+	 * 如果需要优化，可以在这个函数里对css打包
+	 * 
+	 */
+	protected function getCssArr(){
+		return $this->css ;
+	}
+	
+	/**
+	 * 如果需要优化可以在这个函数里对js进行打包
+	 * Enter description here ...
+	 */
+	protected function getJsArr(){
+		return $this->js ;
 	}
 	
 	/**
@@ -29,6 +61,15 @@ abstract class Base{
 		$className = substr($className, strrpos($className, '/') + 1);
 	
 		$mArray=explode('/', trim(str_replace('\\', '/', $str), '/'));
+		
+		$cssArr = $this->getCssArr() ;
+		$this->assign('css_array', $cssArr);
+		
+		$jsArr = $this->getJsArr();
+		$this->assign('js_array', $jsArr) ;
+		
+		$this->template->display('Public/header.html');
+		$this->template->display('Public/nav.html');
 	
 		//两位， 按照用户提交格式显示模板
 		if(count($mArray)>1){
@@ -38,6 +79,12 @@ abstract class Base{
 	
 		//一位， 自动选择模板所属组（Action）
 		$this->template->display($className.'/'.$str.'.html');
+		
+		$sqls = \Lib\Core\Db\DbHelper::getSql();
+		$this->assign('debug_sqls', $sqls);
+		$this->template->display('Public/debug.html');
+		
+		$this->template->display('Public/footer.html');
 	}
 	
 	/**
@@ -95,8 +142,8 @@ abstract class Base{
 	
 		//初始化环境变量
 		$T->assign('__ROOT__',__ROOT__);
-		$T->assign('__PUBLIC__', __THEME__.'/public');
-		$T->assign('__THEME__',__THEME__.'/'.$this->homepath);
+		$T->assign('__PUBLIC__', $this->__PUBLIC__);
+		$T->assign('__THEME__', $this->__THEME__);
 	
 		$this->template=$T;
 		

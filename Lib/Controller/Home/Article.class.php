@@ -18,6 +18,13 @@ class Article extends Base
 		
 		$this->assign('page_title', $detail['title'].'_'.$this->webname) ;
 
+		$this->addCss('/theme/public/editor/third-party/SyntaxHighlighter/shCoreDefault.css');
+		$this->addCss('/theme/home/style/editor_t.css') ;
+		
+		$this->addJs('/theme/public/editor/ueditor.parse.js') ;
+		$this->addJs('/theme/public/editor/ueditor.parse.js') ;
+		$this->addJs('/theme/public/editor/third-party/SyntaxHighlighter/shCore.js');
+		
 		$this->show('detail');
 	}
 }

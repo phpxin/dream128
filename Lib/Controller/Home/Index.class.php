@@ -15,6 +15,8 @@ class Index extends Base
 			$list = $db->select();
 		
 		$this->assign('list', $list);
+		
+		
 
 		$this->show("index");
 	}

@@ -15,6 +15,14 @@ class Tips{
 	// 系统错误
 	public static $_CODE_SYSERR = 500 ;
 	
+	private static function ajax_echo($ret, $ext) {
+		if(DEBUG_MODE){
+			$ret['debug'] = \Lib\Core\Db\DbHelper::getSql();
+		}
+		
+		echo json_encode($ret, $ext) ;
+	}
+	
 	
 	public static function ajax_success($data, $isexit = true)
 	{
@@ -22,7 +30,8 @@ class Tips{
 		$ret['now'] = date('Y-m-d H:i:s') ;
 		$ret['data'] = $data ;
 		
-		echo json_encode($ret, JSON_UNESCAPED_UNICODE) ;
+		//echo json_encode($ret, JSON_UNESCAPED_UNICODE) ;
+		self::ajax_echo($ret, JSON_UNESCAPED_UNICODE);
 		if ($isexit)	exit() ;
 	}
 	
@@ -40,7 +49,8 @@ class Tips{
 			array_push($ret['data'], $data);
 		}
 		
-		echo json_encode($ret, JSON_UNESCAPED_UNICODE) ;
+		//echo json_encode($ret, JSON_UNESCAPED_UNICODE) ;
+		self::ajax_echo($ret, JSON_UNESCAPED_UNICODE);
 		if ($isexit)	exit() ;
 	}
 	
