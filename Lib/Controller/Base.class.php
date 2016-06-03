@@ -80,9 +80,11 @@ abstract class Base{
 		//一位， 自动选择模板所属组（Action）
 		$this->template->display($className.'/'.$str.'.html');
 		
-		$sqls = \Lib\Core\Db\DbHelper::getSql();
-		$this->assign('debug_sqls', $sqls);
-		$this->template->display('Public/debug.html');
+		if (DEBUG_MODE) {
+			$sqls = \Lib\Core\Db\DbHelper::getSql();
+			$this->assign('debug_sqls', $sqls);
+			$this->template->display('Public/debug.html');
+		}
 		
 		$this->template->display('Public/footer.html');
 	}
