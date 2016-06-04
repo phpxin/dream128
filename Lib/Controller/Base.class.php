@@ -154,10 +154,11 @@ abstract class Base{
 		$T->registerPlugin(\Smarty::PLUGIN_FUNCTION, 'dump', 'dump');
 	
 		//初始化环境变量
+		
 		$T->assign('__ROOT__',__ROOT__);
 		$T->assign('__PUBLIC__', $this->__PUBLIC__);
 		$T->assign('__THEME__', $this->__THEME__);
-		$T->assign('__DEBUG__', DEBUG ? 1 : 0 );
+		$T->assign('__DEBUG__', DEBUG_MODE ? 1 : 0 );
 	
 		$this->template=$T;
 		
