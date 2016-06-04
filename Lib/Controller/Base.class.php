@@ -62,31 +62,41 @@ abstract class Base{
 	
 		$mArray=explode('/', trim(str_replace('\\', '/', $str), '/'));
 		
+		
+		
 		$cssArr = $this->getCssArr() ;
 		$this->assign('css_array', $cssArr);
 		
 		$jsArr = $this->getJsArr();
 		$this->assign('js_array', $jsArr) ;
 		
-		$this->template->display('Public/header.html');
-		$this->template->display('Public/nav.html');
+		/*
+		$this->display('Public/header.html', $cache_id);
+		$this->display('Public/nav.html');
+		*/
 	
 		//两位， 按照用户提交格式显示模板
 		if(count($mArray)>1){
-			$this->template->display($str.'.html');
+			$this->display($str.'.html');
 			return ;
 		}
-	
-		//一位， 自动选择模板所属组（Action）
-		$this->template->display($className.'/'.$str.'.html');
 		
 		if (DEBUG_MODE) {
 			$sqls = \Lib\Core\Db\DbHelper::getSql();
 			$this->assign('debug_sqls', $sqls);
-			$this->template->display('Public/debug.html');
+			//$this->template->display('Public/debug.html');
 		}
+	
+		//一位， 自动选择模板所属组（Action）
+		$this->display($className.'/'.$str.'.html');
 		
-		$this->template->display('Public/footer.html');
+		//$this->template->display('Public/footer.html');
+		
+	}
+	
+	private function display($tmpFile){
+		$cache_id = md5($_SERVER['QUERY_STRING']) ;
+		$this->template->display($tmpFile, $cache_id);
 	}
 	
 	/**
@@ -136,7 +146,8 @@ abstract class Base{
 	
 		//$T->debugging = DEBUG_MODE ? true : false ;
 		$T->debugging = false ;
-		$T->caching = DEBUG_MODE ? false : true ;
+		//$T->caching = DEBUG_MODE ? false : true ;
+		$T->caching = false ;
 		$T->cache_lifetime = 120;
 	
 		//注册模板需要的函数
@@ -146,6 +157,7 @@ abstract class Base{
 		$T->assign('__ROOT__',__ROOT__);
 		$T->assign('__PUBLIC__', $this->__PUBLIC__);
 		$T->assign('__THEME__', $this->__THEME__);
+		$T->assign('__DEBUG__', DEBUG ? 1 : 0 );
 	
 		$this->template=$T;
 		
