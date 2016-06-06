@@ -16,6 +16,8 @@ class Page{
     private $limit;   //每页显示数
     private $itemLimit; 	//每屏显示页数
     
+    private $getps ;  //get参数
+    
 //成员方法
 	/**
 	 * 构造函数
@@ -26,7 +28,7 @@ class Page{
 	 * @param $itemLimit 分页显示数（非必须，默认显示全部）
 	 * @param $limit 每页显示条目（非必须，默认为config配置条目）
 	 */
-    public function __construct($url,$nowPage,$totalData,$itemLimit=0,$limit=0){ //初始化
+    public function __construct($url,$nowPage,$totalData,$itemLimit=0,$limit=0,$autourl=true){ //初始化
 
             $this->url=$url;        //初始化地址
             $this->totalData=$totalData;    //初始化总数
@@ -38,6 +40,24 @@ class Page{
             $this->prev=$this->setPrev();//上一页
             $this->next=$this->setNext();    //下一页
             
+    }
+    
+    private function autoCompleteGetParams(){
+    	$this->getps = '' ;
+    	$_getps = array() ;
+    	foreach($_GET as $k=>$v) {
+    		//$this->getps .= $k.'='.$v.'&' ;
+    		if ($k == 'page')
+    			continue ;
+    		
+    		$_getps[] = $k.'='.$v ;
+    	}
+    	
+    	if($_getps){
+    		$this->getps = implode('&', $_getps);
+	    	$this->url .= $this->getps . '&' ;
+    	}
+    	
     }
     
     /**
@@ -80,7 +100,8 @@ class Page{
     		for($i=1; $i<=$this->totalPage; $i++){
     			if($i==$this->nowPage)	$class='class="on"';
 				else $class='';
-    			$list.= '<a '.$class.' href="'.$this->url.'page='.$i.'">'.$i.'</a>';
+    			//$list.= '<a '.$class.' href="'.$this->url.'page='.$i.'">'.$i.'</a>';
+    			$list .= '<li><a href="'.$this->url.'page='.$i.'">'.$i.'</a></li>' ;
     		}
     		
     		return $list;
@@ -114,6 +135,8 @@ class Page{
      * Enter description here ...
      */
     public function getPage(){
+    	
+    	/*
         $pageView='<div id="page-view">';
     	
     	$pageView.='<a href="'.$this->url.'page=1">首页</a>';
@@ -129,7 +152,27 @@ class Page{
         $pageView.='<span>'.$this->nowPage.'/'.$this->totalPage.' 页</span>';
         
         $pageView.='</div>';
-        
+        */
+    	
+    	$pageItem = $this->createEachItem();
+    	
+    	$pageView = '
+    	<nav>
+		  <ul class="pagination">
+		    <li>
+		      <a href="'.$this->url.'page='.$this->prev.'" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+			'.$pageItem.'
+		    <li>
+		      <a href="'.$this->url.'page='.$this->next.'" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		  </ul>
+		</nav>		
+    			' ;
         
         return $pageView;
     }
