@@ -8,7 +8,7 @@ class Index extends Base
 		$type = getRequestInt('type', 0, 'get');
 		$page = getRequestInt('page', 1, 'get');
 		
-		$limit = 1 ;
+		$limit = 10 ;
 		$plimit = 5 ;
 		
 		$db = M("article");

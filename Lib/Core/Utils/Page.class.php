@@ -101,10 +101,10 @@ class Page{
     			if($i==$this->nowPage)	$class='class="on"';
 				else $class='';
     			//$list.= '<a '.$class.' href="'.$this->url.'page='.$i.'">'.$i.'</a>';
-    			$list .= '<li><a href="'.$this->url.'page='.$i.'">'.$i.'</a></li>' ;
+    			$list .= '<li><a '.$class.' href="'.$this->url.'page='.$i.'">'.$i.'</a></li>' ;
     		}
     		
-    		return $list;
+    		return $list; 
     	}
 
     	//设置了每屏显示数 补全
@@ -124,7 +124,7 @@ class Page{
 			if($i==$this->nowPage)	$class='class="on"';
 			else $class='';
 			//$list.= '<a '.$class.' href="'.$this->url.'page='.$i.'">'.$i.'</a>';
-			$list .= '<li><a href="'.$this->url.'page='.$i.'">'.$i.'</a></li>' ;
+			$list .= '<li><a '.$class.' href="'.$this->url.'page='.$i.'">'.$i.'</a></li>' ;
 		}
 		
 		
