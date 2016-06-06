@@ -40,6 +40,9 @@ class Page{
             $this->prev=$this->setPrev();//上一页
             $this->next=$this->setNext();    //下一页
             
+            
+            if ($autourl)
+            	$this->autoCompleteGetParams();
     }
     
     private function autoCompleteGetParams(){
