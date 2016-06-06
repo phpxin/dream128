@@ -18,8 +18,11 @@ class Index extends Base
 		else
 			$total = $db->count();
 		
-		$pageObj = new \Lib\Core\Utils\Page($_SERVER['SCRIPT_NAME'] .'?', $page, $total,  $plimit, $limit) ;
-		$pageHtml = $pageObj->getPage();
+		$pageHtml = '' ;
+		if ($total > $limit){
+			$pageObj = new \Lib\Core\Utils\Page($_SERVER['SCRIPT_NAME'] .'?', $page, $total,  $plimit, $limit) ;
+			$pageHtml = $pageObj->getPage();
+		}
 		
 		$limit = (($page-1) * $limit) . ',' . $limit ;
 		
