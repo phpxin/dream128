@@ -38,7 +38,7 @@ class Base extends \Lib\Controller\Base{
 	}
 
 	protected function regHotList() {
-		$list = M("article")->getAll(10);
+		$list = M("article")->order('id asc')->getAll(10);
 		$this->assign('hotlist', $list);
 	}
 	

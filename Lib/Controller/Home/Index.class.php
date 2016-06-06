@@ -27,9 +27,9 @@ class Index extends Base
 		$limit = (($page-1) * $limit) . ',' . $limit ;
 		
 		if ($type)
-			$list = $db->where('type='.$type)->limit($limit)->select();
+			$list = $db->where('type='.$type)->limit($limit)->order('id asc')->select();
 		else 
-			$list = $db->limit($limit)->select();
+			$list = $db->limit($limit)->order('id asc')->select();
 		
 		$this->assign('list', $list);
 		$this->assign('pageHtml', $pageHtml);
