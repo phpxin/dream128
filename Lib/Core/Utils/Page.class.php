@@ -123,7 +123,8 @@ class Page{
 		for($i=$_startItem; $i<=$_stopItem; $i++){
 			if($i==$this->nowPage)	$class='class="on"';
 			else $class='';
-			$list.= '<a '.$class.' href="'.$this->url.'page='.$i.'">'.$i.'</a>';
+			//$list.= '<a '.$class.' href="'.$this->url.'page='.$i.'">'.$i.'</a>';
+			$list .= '<li><a href="'.$this->url.'page='.$i.'">'.$i.'</a></li>' ;
 		}
 		
 		
