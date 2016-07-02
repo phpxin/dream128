@@ -69,11 +69,6 @@ abstract class Base{
 		
 		$jsArr = $this->getJsArr();
 		$this->assign('js_array', $jsArr) ;
-		
-		/*
-		$this->display('Public/header.html', $cache_id);
-		$this->display('Public/nav.html');
-		*/
 	
 		//两位， 按照用户提交格式显示模板
 		if(count($mArray)>1){
@@ -84,14 +79,11 @@ abstract class Base{
 		if (DEBUG_MODE) {
 			$sqls = \Lib\Core\Db\DbHelper::getSql();
 			$this->assign('debug_sqls', $sqls);
-			//$this->template->display('Public/debug.html');
 		}
 	
 		//一位， 自动选择模板所属组（Action）
 		$this->display($className.'/'.$str.'.html');
-		
-		//$this->template->display('Public/footer.html');
-		
+
 	}
 	
 	private function display($tmpFile){

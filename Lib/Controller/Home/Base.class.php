@@ -16,13 +16,6 @@ class Base extends \Lib\Controller\Base{
 		
 		parent::init();
 		
-		$this->addCss($this->__PUBLIC__ . '/bootstrap3/bower_components/bootstrap/dist/css/bootstrap.min.css');
-		$this->addCss($this->__THEME__ . '/style/main.css') ;
-		
-		$this->addJs($this->__THEME__ . '/script/baidu.js') ;
-		$this->addJs($this->__PUBLIC__ . '/bootstrap3/bower_components/jquery/dist/jquery.min.js') ;
-
-		
 		$this->assign("page_title", $this->webname) ;
 		$this->assign("page_keywords", "dream128，个人博客，IT技术，小游戏，编程语言，数据库，游戏编程") ;
 	}

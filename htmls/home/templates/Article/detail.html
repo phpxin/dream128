@@ -1,34 +1,25 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<{include file="../Public/header.html"}>
+    <{include file="../Public/header.html"}>
 </head>
 <body>
 <{include file="../Public/nav.html"}>
-<div class="container main">
-	<div class="row">
-		<div class="col-md-9">
-			<div class="panel panel-default">
-			  <div class="panel-heading">
-			    <h3 class="panel-title"><{$detail.title}></h3>
-			  </div>
-			  <div class="panel-body" id="preview">
-                  <!-- <iframe id="edui271_iframe" class="%%-iframe" height="100%" width="100%" frameborder="0" src="/theme/public/view.html"></iframe> -->
-                  <div id="preview"><{$content}></div>
-			  </div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<{include file="../Public/hot.html"}>
-		</div>
+<div id="page">
 
-	</div>
-
+    <div class="article_content">
+        <div id="preview"><{$content}></div>
+    </div>
+    <!-- end #sidebar -->
+    <div style="clear: both;">&nbsp;</div>
 </div>
-<script>
-uParse('#preview') ;
-$('.syntaxhighlighter').css('width', '200px');
-</script>
+<!-- end #page -->
 <{include file="../Public/footer.html"}>
+<script>
+    uParse('#preview') ;
+    $('.syntaxhighlighter').css('width', '200px');
+</script>
+</script>
+<{include file="../Public/analyze.html"}>
 </body>
 </html>

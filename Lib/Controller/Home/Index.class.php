@@ -34,9 +34,12 @@ class Index extends Base
 		if ($list){
 			foreach ($list as $key => $val){
 				$list[$key]['content'] =  mb_substr($val['content'], 0,100, APP_CHARSET)  ;
+				$list[$key]['addtime'] = date('r', $val['addtime']);
 			}
 		}
 
+		$this->addCss($this->__THEME__.'/style.css');
+		$this->addCss('http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css') ;
 
 		// select the hot articles
 		$this->regHotList() ;
@@ -46,7 +49,7 @@ class Index extends Base
 		$this->assign('list', $list);
 		$this->assign('pageHtml', $pageHtml);
 
-		$this->show("index2");
+		$this->show("index");
 	}
 
 

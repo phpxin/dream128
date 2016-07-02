@@ -1,42 +1,68 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<{include file="../Public/header.html"}>
+    <{include file="../Public/header.html"}>
 </head>
 <body>
 <{include file="../Public/nav.html"}>
-<div class="container main">
-	
-	<div class="row">
-		<div class="col-md-9">
-			<div class="panel panel-default">
-			  <div class="panel-heading">
-			    <h3 class="panel-title">文章列表</h3>
-			  </div>
-			  <div class="panel-body">
-                  
-                  <{if !$list }>
-					<div class="alert alert-info">
-                    	暂无文章
-                    </div>
-                  <{else}>
-					<{foreach from=$list item=article}>
-					<p><a href="<{U_home m=article a=detail p="id=<{$article.id}>"}>" title="<{$article.title}>"><{$article.title}></a></p>
-					<{/foreach}>
-                  <{/if}>
-                  
-                  
-                  <{$pageHtml}>
-			  </div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<{include file="../Public/hot.html"}>
-		</div>
+<div id="page">
+    <div id="content">
 
-	</div>
+        <{if !$list }>
 
+            暂无文章
+
+        <{else}>
+        <{foreach from=$list item=article}>
+        <div class="post">
+            <h2 class="title"><a href="<{U_home m=article a=detail p="id=<{$article.id}>"}>" title="<{$article.title}>"> <{$article.title}></a></h2>
+            <p class="meta"><{$article.addtime}> Posted by phpxin</p>
+            <div class="entry">
+                <p><{$article.content}></p>
+            </div>
+        </div>
+        <{/foreach}>
+        <{/if}>
+
+    </div><!-- end #content -->
+    <div id="sidebar">
+        <ul>
+            <li>
+                <h2> <i class="fa fa-modx"></i> DO </h2>
+                <p id="date"></p>
+            </li>
+            <li>
+                <h2> <i class="fa fa-modx"></i> Hot</h2>
+                <ul>
+                    <{section loop=$hotlist name=article}>
+                    <li><a href="<{U_home m=article a=detail p="id=<{$hotlist[article].id}>"}>" title="<{$article.title}>"> <{if $smarty.section.article.index lt 3}> <i class="fa fa-fire"></i> <{/if}> <{$hotlist[article].title}></a></li>
+                    <{/section}>
+                </ul>
+            </li>
+            <li>
+                <h2> <i class="fa fa-modx"></i> News </h2>
+                <ul>
+                    <{foreach from=$newlist item=article}>
+                        <li><a href="<{U_home m=article a=detail p="id=<{$article.id}>"}>" title="<{$article.title}>"><{$article.title}></a></li>
+                    <{/foreach}>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- end #sidebar -->
+    <div style="clear: both;">&nbsp;</div>
 </div>
+<!-- end #page -->
 <{include file="../Public/footer.html"}>
+<script src="/theme/public/bootstrap3/bower_components/jquery/dist/jquery.min.js" type="text/javascript" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+    upDate();
+    setInterval("upDate()", 1000) ;
+    function upDate(){
+        var _d = new Date();
+        $('#date').html(_d.toDateString() + '<br />' + _d.toTimeString());
+    }
+</script>
+<{include file="../Public/analyze.html"}>
 </body>
 </html>
