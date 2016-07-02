@@ -2,13 +2,13 @@
 <p><button style="margin: 5px; float:left; color: #f90; padding:0 5px;" status-data = "1" id="debug-btn">x</button><div style="clear:both"></div></p>
 <section style="border-top: 1px solid #fff; width: 100%">
 
-	<div style="line-height:30px; width: 100%; padding: 0 10px;">
+	<div style="line-height:30px; width: 98%; padding: 0 1%; ">
 		<div style="width:60%; float:left;">SQL</div>
 		<div style="width:20%; float:left;">row</div>
 		<div style="width:10%; float:left;">time</div>
 	</div>
 	<{foreach from=$debug_sqls item=item_sql}>
-	<div style="line-height:30px; width: 100%; padding: 0 10px; background-color:<{if $item_sql.time gt 0.1}> red <{else}> green <{/if}>" >
+	<div style="line-height:30px; width: 98%; padding: 0 1%; background-color:<{if $item_sql.time gt 0.1}> red <{else}> green <{/if}>" >
 		<div style="width:60%; float:left;"><{$item_sql.sql}></div>
 		<div style="width:20%; float:left;"><{$item_sql.rowcount}></div>
 		<div style="width:10%; float:left;"><{$item_sql.time}></div>

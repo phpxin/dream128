@@ -11,3 +11,4 @@ htmls/home/cache
 htmls/admin/templates_c/*
 htmls/admin/cache
 .externalToolBuilders
+.idea
