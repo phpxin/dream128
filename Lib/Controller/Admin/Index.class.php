@@ -26,7 +26,7 @@ class Index extends Base
 	public function doLogin()
 	{
 		$_U = 'root' ;
-		$_P = 'd41d8cd98f00b204e9800998ecf8427e' ;
+		$_P = ADMIN_PWD ;
 				
 		$pass = getRequestString('password') ;
 
