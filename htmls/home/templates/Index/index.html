@@ -13,6 +13,24 @@
             暂无文章
 
         <{else}>
+
+
+        <{if $ptype eq 'getlist'}>
+
+        <div class="post">
+            <{foreach from=$list item=article}>
+            <div class="post-list-item"><a href="<{U_home m=article a=detail p="id=<{$article.id}>"}>" title="<{$article.title}>"> <{$article.title}></a></div>
+            <{/foreach}>
+
+            <div id="limit-page">
+                <{$pageHtml}>
+                <div class="clean"></div>
+            </div>
+
+        </div>
+
+        <{else}>
+
         <{foreach from=$list item=article}>
         <div class="post">
             <h2 class="title"><a href="<{U_home m=article a=detail p="id=<{$article.id}>"}>" title="<{$article.title}>"> <{$article.title}></a></h2>
@@ -22,6 +40,9 @@
             </div>
         </div>
         <{/foreach}>
+
+        <{/if}>
+
         <{/if}>
 
     </div><!-- end #content -->
@@ -54,7 +75,6 @@
 </div>
 <!-- end #page -->
 <{include file="../Public/footer.html"}>
-<script src="/theme/public/bootstrap3/bower_components/jquery/dist/jquery.min.js" type="text/javascript" language="javascript"></script>
 <script type="text/javascript" language="javascript">
     upDate();
     setInterval("upDate()", 1000) ;

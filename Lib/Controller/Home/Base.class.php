@@ -18,7 +18,20 @@ class Base extends \Lib\Controller\Base{
 		
 		$this->assign("page_title", $this->webname) ;
 		$this->assign("page_keywords", "dream128，个人博客，IT技术，小游戏，编程语言，数据库，游戏编程") ;
+
+		$this->addJs($this->__PUBLIC__.'/bootstrap3/bower_components/jquery/dist/jquery.min.js') ;
+        $this->addJs($this->__THEME__.'/script/common.js');
+
+        $this->regTypeList();
 	}
+
+
+    protected function regTypeList(){
+        $currentType = getRequestInt('type', 0, 'get');
+        $typeList = M('type')->getAll();
+        $this->assign('currentType', $currentType);
+        $this->assign('typeList', $typeList);
+    }
 
 	
 	protected function registerSmartyFuncs(){
