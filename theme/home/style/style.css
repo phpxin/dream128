@@ -367,6 +367,7 @@ hr { display: none; }
 
 .article_content {
 	width: 880px;
+    min-height: 600px;
 	margin-bottom: 20px;
 	padding: 20px 20px;
 	border: 1px dashed #B9B6A5;

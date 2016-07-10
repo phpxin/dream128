@@ -38,9 +38,6 @@ class Index extends Base
             }
         }
 
-        $this->addCss($this->__THEME__.'/style/style.css');
-        $this->addCss($this->__PUBLIC__.'/font-awesome-4.5.0/css/font-awesome.min.css') ;
-
 
         // select the hot articles
         $this->regHotList() ;
@@ -67,9 +64,6 @@ class Index extends Base
 				$list[$key]['addtime'] = date('r', $val['addtime']);
 			}
 		}
-
-		$this->addCss($this->__THEME__.'/style/style.css');
-		$this->addCss('http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css') ;
 
 		// select the hot articles
 		$this->regHotList() ;

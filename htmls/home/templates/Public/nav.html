@@ -5,24 +5,32 @@
 <hr />
 <!-- end #logo -->
 <div id="header">
-  <div id="menu">
-    <ul>
-      <li><a href="/" class="first menu-item">Home</a></li>
-      <li class="nav-dropdown">
-          <a href="javascript:void(0);" id="menu-types-trigger" class="menu-item" >types</a>
-          <div class="nav-dropdown-box" id="menu-types">
-              <{foreach from=$typeList item=type}>
-              <div class="nav-dropdown-item"><a href="<{U_home m=index a=getList p="type=<{$type.id}>"}>" title="<{$type.name}>" class="<{if $currentType eq $type.id}>on<{/if}>" ><{$type.name}></a></div>
-              <{/foreach}>
-              <div class="clean"></div>
-          </div>
-      </li>
-      <!--
-      <li class="current_page_item"><a href="#">Blog</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li> -->
-    </ul>
-  </div>
+    <div id="menu">
+        <ul>
+            <li><a href="/" class="first menu-item">Home</a></li>
+            <li class="nav-dropdown">
+              <a href="javascript:void(0);" id="menu-types-trigger" class="menu-item" >types</a>
+              <div class="nav-dropdown-box" id="menu-types">
+                  <{foreach from=$typeList item=type}>
+                  <div class="nav-dropdown-item"><a href="<{U_home m=index a=getList p="type=<{$type.id}>"}>" title="<{$type.name}>" class="<{if $currentType eq $type.id}>on<{/if}>" ><{$type.name}></a></div>
+                  <{/foreach}>
+                  <div class="clean"></div>
+              </div>
+            </li>
+            <li class="nav-dropdown">
+                <a href="javascript:void(0);" id="menu-games-trigger" class="menu-item" >games</a>
+                <div class="nav-dropdown-box" id="menu-games">
+                    <div class="nav-dropdown-item"><a href="<{U_home m=games a=getGame p="act=planebattle"}>" title="planebattle" >飞机大战</a></div>
+                    <div class="nav-dropdown-item"><a href="/games/xxl" title="xxl" >连连看</a></div>
+                    <div class="clean"></div>
+                </div>
+            </li>
+          <!--
+          <li class="current_page_item"><a href="#">Blog</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li> -->
+        </ul>
+    </div>
   <!-- end #menu -->
   <!--<div id="search">
       <form method="get" action="">
@@ -35,22 +43,33 @@
   <!-- end #search -->
 
     <script type="text/javascript">
+
+        var dropBox = {} ;
+
         $(function(){
-            $('#menu-types').hide();
+            creatDropBox('menu-types');
+            creatDropBox('menu-games');
         });
 
-        var menu_type_isshow = false;
 
-        $('#menu-types-trigger').click(function(){
-            if (menu_type_isshow){
-                $('#menu-types').hide();
-                menu_type_isshow = false;
-            }else{
-                $('#menu-types').show();
-                menu_type_isshow = true;
-            }
+        function creatDropBox(name){
 
-        }) ;
+            $('#'+name).hide();
+
+            dropBox[name] = false;
+
+            $('#'+name+'-trigger').click(function(){
+                if (dropBox[name]){
+                    $('#'+name).hide();
+                    dropBox[name] = false;
+                }else{
+                    $('#'+name).show();
+                    dropBox[name] = true;
+                }
+
+            }) ;
+
+        }
 
 
     </script>

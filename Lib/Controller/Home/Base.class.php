@@ -19,8 +19,12 @@ class Base extends \Lib\Controller\Base{
 		$this->assign("page_title", $this->webname) ;
 		$this->assign("page_keywords", "dream128，个人博客，IT技术，小游戏，编程语言，数据库，游戏编程") ;
 
+        $this->addCss($this->__THEME__.'/style/style.css');
+        $this->addCss($this->__PUBLIC__.'/font-awesome-4.5.0/css/font-awesome.min.css') ;
+        
 		$this->addJs($this->__PUBLIC__.'/bootstrap3/bower_components/jquery/dist/jquery.min.js') ;
         $this->addJs($this->__THEME__.'/script/common.js');
+
 
         $this->regTypeList();
 	}

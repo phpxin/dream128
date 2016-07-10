@@ -1,31 +1,18 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<{include file="../Public/header.html"}>
 </head>
 <body>
 <{include file="../Public/nav.html"}>
-<div class="container main">
-	
-	<div class="row">
-		<div class="col-md-12">
-			<div class="panel panel-default">
-			  <div class="panel-heading">
-			    <h3 class="panel-title">Tip</h3>
-			  </div>
-			  <div class="panel-body">
-                  	<div class="content-tip">
-                  	
-                  	<p>请扫描下方二维码，在手机端打开</p>
-                  	<img src="<{U_home m=Index a=getUrlQrcode p="text=<{$text}>"}>" alt="qrcode" />
-                  	
-                  	</div>
-			  </div>
-			</div>
-		</div>
-	</div>
-
+<div id="page">
+        <div class="article_content">
+            <p>请扫描下方二维码，在手机端打开</p>
+            <img src="<{U_home m=Index a=getUrlQrcode p="text=<{$text}>"}>" alt="qrcode" />
+        </div>
 </div>
+<!-- end #page -->
 <{include file="../Public/footer.html"}>
+<{include file="../Public/analyze.html"}>
 </body>
 </html>
