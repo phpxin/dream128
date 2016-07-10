@@ -14,6 +14,7 @@ session_start();
 define('DS', DIRECTORY_SEPARATOR);//系统分隔符
 define('APP_CHARSET', 'utf-8') ;
 define('ADMIN_PWD', '');
+define('MY_ADMIN_PWD', '');
 
 //缓存配置（如果不使用缓存不需要配置）
 define('CACHE_HOST','');

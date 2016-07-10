@@ -88,6 +88,19 @@ function U_admin($_params=array()){
 	return rtrim(__ROOT__.'/admin.php?m='.$module.'&a='.$action.'&'.$data, '&');
 }
 
+function U_myadmin($_params=array()){
+
+	$module=ucfirst($_params['m']); //module
+	empty($module)?$module='Index':null;
+
+	$action=$_params['a']; //action
+	empty($action)?$action='index':null;
+
+	$data = !empty($_params['p']) ? $_params['p'] : '' ;
+
+	return rtrim(__ROOT__.'/myadmin.php?m='.$module.'&a='.$action.'&'.$data, '&');
+}
+
 /**
  * 获取Input值
  * @param string $key				需要获取的值

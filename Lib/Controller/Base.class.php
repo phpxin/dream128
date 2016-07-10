@@ -114,6 +114,7 @@ abstract class Base{
 	private function registerSmartyFuncsSys(){
 		$this->template->registerPlugin(\Smarty::PLUGIN_FUNCTION, 'U_home', 'U_home');
 		$this->template->registerPlugin(\Smarty::PLUGIN_FUNCTION, 'U_admin', 'U_admin');
+		$this->template->registerPlugin(\Smarty::PLUGIN_FUNCTION, 'U_myadmin', 'U_myadmin');
 		
 		$this->registerSmartyFuncs();
 	}

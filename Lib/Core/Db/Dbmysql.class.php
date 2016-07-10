@@ -71,7 +71,8 @@ abstract class Dbmysql{
 
 		$this->query("set names $this->charset");
 
-		$this->getFields();
+		//$this->getFields();
+        $this->_field = '*';
 
 	}
 
@@ -101,7 +102,7 @@ abstract class Dbmysql{
 	 * Enter description here ...
 	 * @throws SQLException
 	 * @return void|unknown
-	 */
+
 	protected function writeFields(){
 		$sql="desc ".$this->tableName;
 		$result=$this->query($sql);
@@ -125,12 +126,12 @@ abstract class Dbmysql{
 		}
 
 		return $field;
-	}
+	}  */
 
 	/**
 	 * 获取字段缓存
 	 * Enter description here ...
-	 */
+
 	protected function getFields(){
 		$file=$this->cacheFolder.$this->tableName.'.php';
 		if(file_exists($file)){
@@ -138,7 +139,7 @@ abstract class Dbmysql{
 		}else{
 			$this->fields=$this->writeFields();
 		}
-	}
+	} */
 
 	/**
 	 * 清空条件缓冲
@@ -395,9 +396,11 @@ abstract class Dbmysql{
 		}
 		$field = $this->trimEach($field);
 
+		/*
 		$_field=array_intersect($this->fields, array_values($field));//所有有效字段
 		$_field=array_unique($_field);
-		$this->_field=implode(',', $_field);
+		*/
+		$this->_field=implode(',', $field);
 		return $this;
 	}
 
