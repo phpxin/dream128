@@ -26,8 +26,31 @@ class Base extends \Lib\Controller\Base{
         $this->addJs($this->__THEME__.'/script/common.js');
 
 
+        $this->checkBroser(); //  检查浏览器是否支持
+
+
         $this->regTypeList();
 	}
+
+    protected function checkBroser(){
+        //var_dump($_SERVER['HTTP_USER_AGENT']);
+        //Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Win64; x64; Trident/4.0; .NET CLR 2.0.50727; SLCC2; .NET CLR 3.5.30729; .NET CLR 3.0.30729; InfoPath.3; .NET4.0C)
+        $flag = preg_match('/MSIE ([0-9\.]+)\;/iU', $_SERVER['HTTP_USER_AGENT'], $matcher);
+        if ($flag){
+            if (floatval($matcher[1] <= 8)){
+
+                $this->errorPage('本软件不支持IE8以下浏览器（包含IE8）');
+            }
+        }
+
+    }
+
+    protected function errorPage($msg,$title='错误'){
+        $this->assign('title', $title);
+        $this->assign('msg', $msg);
+        $this->show('Public/error');
+        exit();
+    }
 
 
     protected function regTypeList(){
