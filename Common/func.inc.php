@@ -176,8 +176,8 @@ function M($table, $app=''){
 
 
 function isH5(){
-	var_dump($_SERVER['HTTP_USER_AGENT']);
-	if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/(micromessage|android|ios)/i', $_SERVER['HTTP_USER_AGENT'])){
+	//var_dump($_SERVER['HTTP_USER_AGENT']);
+	if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/(micromessager|android|ios|iphone)/i', $_SERVER['HTTP_USER_AGENT'])){
 		return true;
 	}
 	return false;
