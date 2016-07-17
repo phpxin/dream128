@@ -17,6 +17,14 @@ class Article extends Base
 		return $this->alias;
 	}
 
+	public function getCount(){
+        $where = array(
+            'status='.self::$_STATUS_ONLINE
+        );
+
+        return $this->where($where)->count();
+    }
+
 	public function getAll($limit = 30 , $page = 1) {
 		$_limit = '' ;
 		if($limit!=0){

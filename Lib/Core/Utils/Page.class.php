@@ -101,10 +101,10 @@ class Page{
     	if($this->itemLimit==0 || $this->totalPage<$this->itemLimit){
     		//循环创建数组
     		for($i=1; $i<=$this->totalPage; $i++){
-    			if($i==$this->nowPage)	$class='class="on"';
+    			if($i==$this->nowPage)	$class='class="active"';
 				else $class='';
     			//$list.= '<a '.$class.' href="'.$this->url.'page='.$i.'">'.$i.'</a>';
-    			$list .= '<li><a '.$class.' href="'.$this->url.'page='.$i.'">'.$i.'</a></li>' ;
+    			$list .= '<li '.$class.'><a href="'.$this->url.'page='.$i.'">'.$i.'</a></li>' ;
     		}
     		
     		return $list; 

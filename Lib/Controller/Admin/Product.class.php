@@ -8,16 +8,28 @@ class Product extends Base
 	public function glist()
 	{
 		$db = M("article");
-		$list = $db->getAll();
+        $pagelimit = 20 ;
+        $page = getRequestInt('page', 1, 'get');
+
+		$list = $db->getAll($pagelimit, $page);
 		
 		$types = M("type")->getAllWithIdKey();
+
+
 		
 		if ($list) {
 			foreach ($list as $k=>$v){
 				$list[$k]['type_name'] = isset($types[$v['type']]) ? $types[$v['type']]['name'] : '--'  ;
 			}
 		}
-		
+
+
+
+        $total = $db->getCount();
+
+		$pageObj = new \Lib\Core\Utils\Page($_SERVER['SCRIPT_NAME'].'?', $page, $total, 5, $pagelimit) ;
+
+		$this->assign('pagehtml', $pageObj->getPage()) ;
 		$this->assign('glist', $list);
 		$this->show("list");
 	}
