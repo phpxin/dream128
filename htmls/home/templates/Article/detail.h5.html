@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><{$page_title}></title>
+    <meta name="keywords" content="<{$page_keywords}>" />
+    <meta name="description" content="<{$page_keywords}>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+
+    <link href="<{$__PUBLIC__}>/editor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" rel="stylesheet" >
+    <script src="<{$__PUBLIC__}>/editor/ueditor.parse.js" type="text/javascript" language="javascript"></script>
+    <script src="<{$__PUBLIC__}>/editor/third-party/SyntaxHighlighter/shCore.js" type="text/javascript" language="javascript"></script>
+</head>
+<body>
+    <h3><{$detail.title}></h3><p style="margin-bottom: 20px;"><i><{$detail.addtime|date_format:"%Y-%m-%d"}></i></p>
+    <hr />
+
+    <div style="margin-top: 40px;">
+
+        <div id="preview"><{$content}></div>
+
+    </div>
+    <script>
+        uParse('#preview') ;
+        $('.syntaxhighlighter').css('width', '200px');
+    </script>
+</body>
+</html>

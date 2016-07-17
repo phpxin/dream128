@@ -26,6 +26,11 @@ class Article extends Base
 		$this->addJs($this->__PUBLIC__.'/editor/third-party/SyntaxHighlighter/shCore.js');
 		
 
+		if (isH5()){
+			$this->show('detail.h5');
+			exit();
+		}
+
 		$this->show('detail');
 	}
 

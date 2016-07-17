@@ -173,34 +173,14 @@ function M($table, $app=''){
 	return $dbMaster[$App][$table];
 }
 
-/**
- * 处理http get 数据
- * @param string $table 表名
-function createGetParams(){
-	if(URL_MODE===1){
-		if(!empty($_SERVER['PATH_INFO'])){
-			
-			$pathInfo = trim(trim($_SERVER['PATH_INFO']),'/');
-			$paramArray = array_reverse(explode('/',$pathInfo));
-			//获取控制器参数
-			$safeParam['module'] = safeStr(array_pop($paramArray)) ;
-			$safeParam['action'] = safeStr(array_pop($paramArray)) ;
-			//生成GET数组其他参数
-			while(!empty($paramArray)){
-				$key = safeStr(array_pop($paramArray));
-				$value = safeStr(array_pop($paramArray));
-				$safeParam[$key] = $value ;
-			}
-		}
-	}
-	
-	foreach($_GET as $key=>$value){
-		$safeParam[$key] = safeStr($value) ;
-	}
-	
-	return $safeParam;
-}
- */
 
+
+function isH5(){
+
+	if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/(micromessage|android|ios)/i', $_SERVER['HTTP_USER_AGENT'])){
+		return true;
+	}
+	return false;
+}
 
 ?>

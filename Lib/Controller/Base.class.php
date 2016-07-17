@@ -10,6 +10,8 @@ abstract class Base{
 	
 	protected $__THEME__ = '' ;
 	protected $__PUBLIC__ = '' ;
+
+	protected $__DEVICE__ = 'PC' ;
 	
 	protected $css = array();
 	protected $js = array();

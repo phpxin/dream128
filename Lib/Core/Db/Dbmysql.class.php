@@ -486,7 +486,8 @@ abstract class Dbmysql{
 			return false;
 		}
 
-		$f=array_intersect($this->fields, array_keys($data)); //合法数据
+		//$f=array_intersect($this->fields, array_keys($data)); //合法数据
+		$f = array_keys($data);
 		foreach($f as $v){
 			$sets[]="$v='$data[$v]'";
 		}
