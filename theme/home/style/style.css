@@ -27,7 +27,13 @@ h2 { font-size: 18px; }
 
 h3 { }
 
+/*
 p, ul, ol {
+	margin-top: 0;
+	line-height: 240%;
+	text-align: justify;
+} */
+ul, ol, .post p.meta {
 	margin-top: 0;
 	line-height: 240%;
 	text-align: justify;
