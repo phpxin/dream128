@@ -270,7 +270,9 @@ abstract class Dbmysql{
 	 * @param unknown_type $data
 	 */
 	public function add($data){
-		$realFieldArray=array_intersect($this->fields, array_keys($data));//所有有效字段
+		//$realFieldArray=array_intersect($this->fields, array_keys($data));//所有有效字段
+		//$field=implode(',', $realFieldArray);
+		$realFieldArray = array_keys($data);
 		$field=implode(',', $realFieldArray);
 
 		foreach($realFieldArray as $v){
