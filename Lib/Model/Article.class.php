@@ -40,7 +40,7 @@ class Article extends Base
 				'status='.self::$_STATUS_ONLINE
 		);
 		
-		$list = $this->where( $where )->limit($_limit)->select() ;
+		$list = $this->where( $where )->limit($_limit)->order('id desc')->select() ;
 
 		return $list;
 

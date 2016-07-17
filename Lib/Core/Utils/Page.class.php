@@ -98,8 +98,11 @@ class Page{
      */
     private function createEachItem()
     {
+		$list = '' ;
+
     	if($this->itemLimit==0 || $this->totalPage<$this->itemLimit){
     		//循环创建数组
+
     		for($i=1; $i<=$this->totalPage; $i++){
     			if($i==$this->nowPage)	$class='class="active"';
 				else $class='';
