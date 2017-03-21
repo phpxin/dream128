@@ -450,7 +450,7 @@ abstract class Dbmysql{
 		}
 
 		$this->execQueryFilter();
-		$sql="select $this->_field from $this->tableName $this->_join $this->_where $this->_group $this->_order $this->_limit";
+		$sql="select $this->_field from $this->tableName $this->_join $this->_where $this->_group $this->_order limit 1";
 
 		$_d=$this->query($sql);
 

@@ -6,6 +6,18 @@
  */
 
 /**
+ * 获取客户端ip地址
+ * @return string 
+ */
+function getClientIp(){
+	if (isset($_SERVER['REMOTE_ADDR'])){
+		return $_SERVER['REMOTE_ADDR'] ;
+	}
+
+	return '' ;
+}
+
+/**
  * debug
  * Enter description here ...
  * @param mixed $obj 打印调试信息
