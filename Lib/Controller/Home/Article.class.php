@@ -116,6 +116,7 @@ class Article extends Base
 		$detail = $db->where('id='.$id)->find();
 
 		$content = $detail['content'] ; //preg_replace('/\s+/', ' ', $detail['content']);
+		$content = htmlspecialchars_decode($content) ;
 
 		echo json_encode(array('code'=>200, 'data'=>$content), JSON_UNESCAPED_UNICODE);
 	}
