@@ -117,6 +117,9 @@ class Article extends Base
 
 		$content = $detail['content'] ; //preg_replace('/\s+/', ' ', $detail['content']);
 		$content = htmlspecialchars_decode($content) ;
+		$content = preg_replace(array('/\<br.*\>/U','/\<\/p\>/U'), array("\n","\n"), $content );
+		$content = strip_tags($content) ;
+
 
 		echo json_encode(array('code'=>200, 'data'=>$content), JSON_UNESCAPED_UNICODE);
 	}
