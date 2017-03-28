@@ -69,38 +69,11 @@ class Article extends Base
 	
 	public function apiGetArticleList()
 	{
-		$type = getRequestInt('type', 0, 'get');
-		$page = getRequestInt('page', 1, 'get');
-
-		$limit = 25 ;
-		$plimit = 5 ;
-
-		$db = M("article");
-
-		if ($type)
-			$total = $db->where("type=".$type)->count();
-		else
-			$total = $db->count();
-
-		$pageHtml = '' ;
-		if ($total > $limit){
-			$pageObj = new \Lib\Core\Utils\Page($_SERVER['SCRIPT_NAME'] .'?', $page, $total,  $plimit, $limit) ;
-			$pageHtml = $pageObj->getPage();
-		}
-
-		$limit = (($page-1) * $limit) . ',' . $limit ;
-
-		if ($type)
-			$list = $db->field("id,title,content,addtime")->where('type='.$type)->limit($limit)->order('id desc')->select();
-		else
-			$list = $db->field("id,title,content,addtime")->limit($limit)->order('id desc')->select();
-
-		if ($list){
-			foreach ($list as $key => $val){
-				$list[$key]['content'] =  mb_substr($val['content'], 0,100, APP_CHARSET)  ;
-				$list[$key]['addtime'] = date('r', $val['addtime']);
-			}
-		}
+		$list = array(
+			array('id'=>1, 'title'=>'锄禾'),
+			array('id'=>2, 'title'=>'早发白帝城'),
+			array('id'=>3, 'title'=>'静夜思'),
+		) ;
 		
 		echo json_encode(array('code'=>200, 'data'=>$list), JSON_UNESCAPED_UNICODE);
 	}
@@ -109,17 +82,16 @@ class Article extends Base
 	{
 		$id = getRequestInt('id', 0, 'get');
 
-		$this->recordArticleLog($id) ;
-
-		$db = M('article');
-
-		$detail = $db->where('id='.$id)->find();
-
-		$content = $detail['content'] ; //preg_replace('/\s+/', ' ', $detail['content']);
-		$content = htmlspecialchars_decode($content) ;
-		$content = preg_replace(array('/\<br.*\>/U','/\<\/p\>/U'), array("\n","\n"), $content );
-		$content = strip_tags($content) ;
-
+		switch ($id) {
+			case 1:
+				$content = "锄禾日当午,\n汗滴禾下土;\n谁知盘中餐,\n粒粒皆辛苦。"  ; break;
+			case 2:
+				$content = "朝辞白帝彩云间,\n千里江陵一日还;\n两岸猿声啼不住,\n轻舟已过万重山。"  ; break;
+			case 3:
+				$content = "床前明月光,\n疑是地上霜;\n举头望明月,\n低头思故乡。"  ; break;
+			default:
+				$content = "" ;
+		}
 
 		echo json_encode(array('code'=>200, 'data'=>$content), JSON_UNESCAPED_UNICODE);
 	}
