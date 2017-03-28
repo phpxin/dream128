@@ -105,5 +105,19 @@ class Article extends Base
 		echo json_encode(array('code'=>200, 'data'=>$list), JSON_UNESCAPED_UNICODE);
 	}
 
+	public function apiGetDetail()
+	{
+		$id = getRequestInt('id', 0, 'get');
+
+		$this->recordArticleLog($id) ;
+
+		$db = M('article');
+
+		$detail = $db->where('id='.$id)->find();
+
+		$content = $detail['content'] ; //preg_replace('/\s+/', ' ', $detail['content']);
+
+		echo json_encode(array('code'=>200, 'data'=>$content), JSON_UNESCAPED_UNICODE);
+	}
 }
 ?>
