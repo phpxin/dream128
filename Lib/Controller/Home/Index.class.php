@@ -60,7 +60,7 @@ class Index extends Base
 
 		if ($list){
 			foreach ($list as $key => $val){
-				$list[$key]['content'] =  mb_substr($val['content'], 0,100, APP_CHARSET)  ;
+				$list[$key]['content'] =  mb_substr(strip_tags($val['content']), 0,100, APP_CHARSET)  ;
 				$list[$key]['addtime'] = date('r', $val['addtime']);
 			}
 		}
