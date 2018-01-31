@@ -150,14 +150,17 @@ hr { display: none; }
 
 #menu ul {
 	margin: 0;
-	padding: 0px;
+	padding: 0;
 	list-style: none;
 	line-height: normal;
+	position: absolute;
 }
 
 #menu li {
 	display: block;
 	float: left;
+	position: relative;
+	width: 100px;
 }
 
 #menu a.menu-item {
@@ -192,22 +195,21 @@ hr { display: none; }
 	position: relative;
 }
 .nav-dropdown-box{
-    position: absolute;
-    top: 30px ;
-    left: 0 ;
+    position: relative;
     border: 1px solid #f90;
     background: #E7E3CF;
     float:left;
     z-index: 4;
 }
 .nav-dropdown-box .nav-dropdown-item{
-    margin: 10px 20px;
+    padding: 10px;
+	width: 100%;
     float:left;
 }
-.nav-dropdown-box .nav-dropdown-item a{
+.nav-dropdown-box .nav-dropdown-item {
     text-decoration: none;
 }
-.nav-dropdown-box .nav-dropdown-item a.on{
+.nav-dropdown-box .nav-dropdown-item.on{
     color: #FF0000;
 }
 
