@@ -56,7 +56,7 @@
                 <h2> <i class="fa fa-modx"></i> Hot</h2>
                 <ul>
                     <{section loop=$hotlist name=article}>
-                    <li><a href="<{U_home m=article a=detail p="id=<{$hotlist[article].id}>"}>" title="<{$article.title}>"> <{if $smarty.section.article.index lt 3}> <i class="fa fa-fire"></i> <{/if}> <{$hotlist[article].title}></a></li>
+                    <li><a href="<{U_home m=article a=detail p="id=<{$hotlist[article].id}>"}>" title="<{$hotlist[article].title}>"> <{if $smarty.section.article.index lt 3}> <i class="fa fa-fire"></i> <{/if}> <{$hotlist[article].title}></a></li>
                     <{/section}>
                 </ul>
             </li>

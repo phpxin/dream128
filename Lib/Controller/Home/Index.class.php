@@ -76,17 +76,20 @@ class Index extends Base
 	}
 
 	protected function regHotList() {
-		$list = M("article")->field("id,title")->order('hits desc ,id asc')->limit(10)->select();
+		$list = M("article")->field("id,title,hits")->order('hits desc ,id asc')->limit(10)->select();
         foreach ($list as $k => $v){
-			$list[$k]['title'] = mb_substr($v['title'], 0, 20, APP_CHARSET);
+//            if (mb_strlen($v['title'])>20){
+//                $list[$k]['title'] = mb_substr($v['title'], 0, 20, APP_CHARSET);
+//            }
+            $list[$k]['title'] .= "&nbsp;&nbsp;[{$v['hits']}阅]" ;
 		}
 		$this->assign('hotlist', $list);
 	}
 	protected function regNewList() {
 		$list = M("article")->field("id,title")->order('id desc')->limit(10)->select();
-        foreach ($list as $k => $v){
-			$list[$k]['title'] = mb_substr($v['title'], 0, 20, APP_CHARSET);
-		}
+//        foreach ($list as $k => $v){
+//			$list[$k]['title'] = mb_substr($v['title'], 0, 20, APP_CHARSET);
+//		}
 		$this->assign('newlist', $list);
 	}
 
