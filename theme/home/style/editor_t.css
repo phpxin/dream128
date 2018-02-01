@@ -1,5 +1,14 @@
-#preview *{font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 14px;}
+#preview *{
+    /*font-family: "Courier New", Courier, Consolas, "Liberation Mono", Menlo, monospace; */
+    font-size: 14px;
+}
 #preview p{font-size: 14px;}
 #preview h1{font-size: 22px; font-weight: bold}
 #preview h2{font-size: 20px; font-weight: bold}
 #preview h3{font-size: 18px; font-weight: bold}
+#preview h3{font-size: 18px; font-weight: bold}
+/*#preview .syntaxhighlighter *{*/
+    /*font-family: "Courier New", Courier, Consolas, "Liberation Mono", Menlo, monospace;*/
+    /*font-size: 14px;*/
+    /*line-height: 24px;*/
+/*}*/

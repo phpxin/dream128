@@ -8,6 +8,10 @@
 
 (function(){
     UE = window.UE || {};
+    //语法高亮设置
+    UE.sh_config = {
+        sh_theme : "shCoreDefault.css"
+    };
     var isIE = !!window.ActiveXObject;
     //定义utils工具
     var utils = {
@@ -341,7 +345,8 @@ UE.parse.register('insertcode',function(utils){
             var jsurl,cssurl;
             if(this.rootPath !== undefined){
                 jsurl = utils.removeLastbs(this.rootPath)  + '/third-party/SyntaxHighlighter/shCore.js';
-                cssurl = utils.removeLastbs(this.rootPath) + '/third-party/SyntaxHighlighter/shCoreDefault.css';
+                //cssurl = utils.removeLastbs(this.rootPath) + '/third-party/SyntaxHighlighter/shCoreDefault.css';
+                cssurl = utils.removeLastbs(this.rootPath) + '/third-party/SyntaxHighlighter/'+UE.sh_config.sh_theme;
             }else{
                 jsurl = this.highlightJsUrl;
                 cssurl = this.highlightCssUrl;
@@ -391,6 +396,7 @@ UE.parse.register('table', function (utils) {
                     'background-position: center right; background-image:url(' + this.rootPath + 'themes/default/images/sortable.png);}' +
                 selector + ' table.sortEnabled tr.firstRow th:hover,' + selector + ' table.sortEnabled tr.firstRow td:hover{background-color: #EEE;}' +
                 selector + ' table{margin-bottom:10px;border-collapse:collapse;display:table;}' +
+                selector + ' table.syntaxhighlighter{display:block;}' + // lixin@20180201 语法高亮特殊配置
                 selector + ' td,' + selector + ' th{ background:white; padding: 5px 10px;border: 1px solid #DDD;}' +
                 selector + ' caption{border:1px dashed #DDD;border-bottom:0;padding:3px;text-align:center;}' +
                 selector + ' th{border-top:1px solid #BBB;background:#F7F7F7;}' +
