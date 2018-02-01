@@ -58,8 +58,15 @@ class Article extends Base
 		$artlog['sessid'] = $sessid;
 		$artlog['articleid'] = $id ;
 		$artlog['created_at'] = $now;
+		$artlog['useragent'] = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT']: '';
 
 		$db->add($artlog);
+
+
+		//更新文章冗余
+		$articleModel = M('article') ;
+		$articleInfo = $articleModel->where('id='.$id)->find();
+		$articleModel->where('id='.$id)->update(['hits'=>$articleInfo['hits']+1]);
 	}
 	
 	

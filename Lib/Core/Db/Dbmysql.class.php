@@ -429,8 +429,7 @@ abstract class Dbmysql{
 	 */
 	public function select(){
 		if(empty($this->_field)){
-			$f=array_unique(array_values($this->fields));
-			$this->_field=implode(',', $f);
+			$this->_field = '*' ;
 		}
 
 		$this->execQueryFilter(); //参数重组
@@ -445,8 +444,7 @@ abstract class Dbmysql{
 	 */
 	public function find(){
 		if(empty($this->_field)){
-			$f=array_unique(array_values($this->fields));
-			$this->_field=implode(',', $f);
+			$this->_field = '*' ;
 		}
 
 		$this->execQueryFilter();
